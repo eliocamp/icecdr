@@ -1,0 +1,19 @@
+gridtype  = projection
+gridsize  = 136192
+datatype  = float
+xsize     = 304
+ysize     = 448
+xname     = xgrid
+xlongname = "projection_grid_x_centers"
+xunits    = "meters"
+yname     = ygrid
+ylongname = "projection_grid_y_centers"
+yunits    = "meters"
+xfirst    = -3837500
+xinc      = 25000
+yfirst    = 5837500
+yinc      = -25000
+grid_mapping=crs
+grid_mapping_name=polar_stereographic
+proj_params="+proj=stere +lat_0=-90 +lat_ts=-70 +lon_0=0 +k=1 +x_0=0 +y_0=0
++a=6378273 +b=6356889.449 +units=m +no_defs"
