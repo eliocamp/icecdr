@@ -4,7 +4,7 @@
 \name{icecdr-package}
 \alias{icecdr}
 \alias{icecdr-package}
-\title{icecdr: What the Package Does (Title Case)}
+\title{icecdr: Download Sea Ice Concentation data from the NSIDC Climate Data Record V4}
 \description{
 More about what it does (maybe more than one line). Continuation lines should be indented.
 }
@@ -17,7 +17,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Jane Doe \email{jane@example.com}
+\strong{Maintainer}: Elio Campitelli \email{eliocampitelli@gmail.com} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID})
 
 }
 \keyword{internal}
