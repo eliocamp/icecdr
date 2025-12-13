@@ -23,3 +23,5 @@ Suggests:
 Imports: 
     glue
 Roxygen: list(markdown = TRUE)
+URL: https://github.com/eliocamp/rice
+BugReports: https://github.com/eliocamp/rice/issues
