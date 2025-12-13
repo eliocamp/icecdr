@@ -1,4 +1,4 @@
-Package: rice
+Package: icecdr
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
@@ -27,5 +27,5 @@ Imports:
     glue,
     rlang
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/eliocamp/rice
-BugReports: https://github.com/eliocamp/rice/issues
+URL: https://github.com/eliocamp/icecdr
+BugReports: https://github.com/eliocamp/icecdr/issues
