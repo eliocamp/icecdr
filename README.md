@@ -40,7 +40,7 @@ With `use_cache = TRUE`, data will not be downloaded if needed.
 ``` r
 system.time(cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE))
 #>    user  system elapsed 
-#>   0.002   0.001   0.003
+#>   0.004   0.000   0.003
 ```
 
 There are four simple functions to download whole-domain data:
