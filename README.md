@@ -35,12 +35,12 @@ cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE)
 #> [1] "data/dfea943a54177904c651dbd736dee723.nc"
 ```
 
-With `use_cache = TRUE`, data will not be downloaded if needed.
+With `use_cache = TRUE`, files are only downloaded if needed.
 
 ``` r
 system.time(cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE))
 #>    user  system elapsed 
-#>   0.004   0.000   0.003
+#>   0.004   0.000   0.004
 ```
 
 There are four simple functions to download whole-domain data:
@@ -59,7 +59,7 @@ subset
 ``` r
 cdr(date_range = dates,
     # Data every 7 days
-    date_stride = 3,
+    date_stride = 7,
     resolution = "daily", 
     # Thin the grid by taking every other gridpoint
     xgrid_stride = 2,
