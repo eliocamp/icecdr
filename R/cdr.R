@@ -30,7 +30,7 @@ make_cdr <- function(definition) {
 #'
 #' @export
 #' @rdname convenience
-antarctic_monthly <- make_cdr(list(
+cdr_antarctic_monthly <- make_cdr(list(
   hemisphere = "south",
   resolution = "monthly"
 ))
