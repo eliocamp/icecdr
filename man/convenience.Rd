@@ -2,9 +2,9 @@
 % Please edit documentation in R/nsidc.R
 \name{antarctic_monthly}
 \alias{antarctic_monthly}
-\alias{antarctic_daily}
-\alias{arctic_monthly}
-\alias{arctic_daily}
+\alias{cdr_antarctic_daily}
+\alias{cdr_arctic_monthly}
+\alias{cdr_arctic_daily}
 \title{Convenience functions}
 \usage{
 antarctic_monthly(
@@ -15,7 +15,7 @@ antarctic_monthly(
   use_cache = FALSE
 )
 
-antarctic_daily(
+cdr_antarctic_daily(
   date_range,
   variables = "cdr_seaice_conc",
   file = NULL,
@@ -23,7 +23,7 @@ antarctic_daily(
   use_cache = FALSE
 )
 
-arctic_monthly(
+cdr_arctic_monthly(
   date_range,
   variables = "cdr_seaice_conc",
   file = NULL,
@@ -31,7 +31,7 @@ arctic_monthly(
   use_cache = FALSE
 )
 
-arctic_daily(
+cdr_arctic_daily(
   date_range,
   variables = "cdr_seaice_conc",
   file = NULL,
@@ -67,4 +67,5 @@ the file already exist.}
 \description{
 These are convenience functions to download, daily or monthly
 sea ice concentration data from the whole Antarctic or Arctic.
+For a more complete low level function, see \code{\link[=cdr]{cdr()}}.
 }

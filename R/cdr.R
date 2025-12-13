@@ -1,4 +1,4 @@
-make_nsidc <- function(definition) {
+make_cdr <- function(definition) {
   force(definition)
   function(
     date_range,
@@ -7,7 +7,7 @@ make_nsidc <- function(definition) {
     dir = tempdir(),
     use_cache = FALSE
   ) {
-    nsidc(
+    cdr(
       date_range = date_range,
       variables = variables,
       hemisphere = definition$hemisphere,
@@ -24,27 +24,34 @@ make_nsidc <- function(definition) {
 #'
 #' These are convenience functions to download, daily or monthly
 #' sea ice concentration data from the whole Antarctic or Arctic.
+#' For a more complete low level function, see [cdr()].
 #'
-#' @inheritParams nsidc
+#' @inheritParams cdr
 #'
 #' @export
 #' @rdname convenience
-antarctic_monthly <- make_nsidc(list(
+antarctic_monthly <- make_cdr(list(
   hemisphere = "south",
   resolution = "monthly"
 ))
 
 #' @export
 #' @rdname convenience
-antarctic_daily <- make_nsidc(list(hemisphere = "south", resolution = "daily"))
+cdr_antarctic_daily <- make_cdr(list(
+  hemisphere = "south",
+  resolution = "daily"
+))
 
 #' @export
 #' @rdname convenience
-arctic_monthly <- make_nsidc(list(hemisphere = "north", resolution = "monthly"))
+cdr_arctic_monthly <- make_cdr(list(
+  hemisphere = "north",
+  resolution = "monthly"
+))
 
 #' @export
 #' @rdname convenience
-arctic_daily <- make_nsidc(list(hemisphere = "north", resolution = "daily"))
+cdr_arctic_daily <- make_cdr(list(hemisphere = "north", resolution = "daily"))
 
 file_name <- function(url) {
   digest::digest(url)
@@ -85,7 +92,7 @@ as_mdlist <- function(vector) {
 #' @return Path or vector of paths to the downloaded files.
 #'
 #' @export
-nsidc <- function(
+cdr <- function(
   date_range = c(NA, NA),
 
   variables = "cdr_seaice_conc",
@@ -201,7 +208,7 @@ nsidc <- function(
           "Downloading file {chunk} of {n_chunks} ({date_range[1]} to {date_range[2]})."
         )
 
-        nsidc(
+        cdr(
           date_range = date_range,
           variables = variables,
           hemisphere = hemisphere,

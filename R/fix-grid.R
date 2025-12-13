@@ -9,7 +9,7 @@
 #' @return The path to the modified file.
 #'
 #' @export
-cdo_fix_grid <- function(file) {
+cdr_fix_grid <- function(file) {
   rlang::check_installed(c("rcdo", "ncdf4"))
 
   grid <- rcdo::cdo_execute(rcdo::cdo_griddes(file))
