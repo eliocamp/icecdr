@@ -11,7 +11,7 @@ Authors@R: c(
   )
 Description: More about what it does (maybe more than one line).
     Continuation lines should be indented.
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: 
@@ -21,7 +21,11 @@ Suggests:
     ncdf4,
     rcdo
 Imports: 
-    glue
+    checkmate,
+    cli,
+    digest,
+    glue,
+    rlang
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/eliocamp/rice
 BugReports: https://github.com/eliocamp/rice/issues

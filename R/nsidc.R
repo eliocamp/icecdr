@@ -82,7 +82,7 @@ as_mdlist <- function(vector) {
 #' the file already exist.
 #'
 #'
-#' @return Path or vect
+#' @return Path or vector of paths to the downloaded files.
 #'
 #' @export
 nsidc <- function(
@@ -164,11 +164,12 @@ nsidc <- function(
 
   # 2gb file limit
   size_limit <- 2 * 1024 * 1024 * 1024
-  nchunks <- ceiling(size / size_limit)
-  if (nchunks > 1) {
-    size <- utils:::format.object_size(size, "auto")
+  n_chunks <- ceiling(size / size_limit)
+  if (n_chunks > 1) {
+    class(size) <- "object_size"
+    size <- format(size, "auto")
     cli::cli_inform(
-      "Request size ({size}) larger than the limit (2 Gb). Downloading in {nchunks} chunks."
+      "Request size ({size}) larger than the limit (2 Gb). Downloading in {n_chunks} chunks."
     )
 
     if (resolution == "daily") {
@@ -184,7 +185,7 @@ nsidc <- function(
 
     files <- vapply(
       unique(chunks),
-      \(chunk) {
+      function(chunk) {
         date_range <- range(dates[chunks == chunk])
 
         if (!is.null(file)) {
@@ -255,7 +256,7 @@ nsidc <- function(
   on.exit(options(old))
   # download.file(url, destination)
 
-  download.file(url, destination)
+  utils::download.file(url, destination)
   return(destination)
 }
 
@@ -336,7 +337,7 @@ nsidc_url <- function(
     collapse = ","
   )
 
-  URLencode(glue::glue("{base}?{query}"))
+  utils::URLencode(glue::glue("{base}?{query}"))
 }
 
 

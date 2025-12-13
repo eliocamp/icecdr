@@ -64,6 +64,9 @@ Requests consisting in more than one file will append a number.}
 \item{use_cache}{Logical indicating whether to not perform the download if
 the file already exist.}
 }
+\value{
+Path or vector of paths to the downloaded files.
+}
 \description{
 This is a low-level function to download data from PolarWatch's ERDDAP
 server.

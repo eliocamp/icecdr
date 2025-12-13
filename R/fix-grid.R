@@ -12,9 +12,7 @@
 cdo_fix_grid <- function(file) {
   rlang::check_installed(c("rcdo", "ncdf4"))
 
-  grid <- file |>
-    rcdo::cdo_griddes() |>
-    rcdo::cdo_execute()
+  grid <- rcdo::cdo_execute(rcdo::cdo_griddes(file))
 
   grid <- grid_parse(grid)
 
@@ -48,9 +46,7 @@ cdo_fix_grid <- function(file) {
 
   grid_file <- grid_write(grid, tempfile())
 
-  out <- file |>
-    rcdo::cdo_setgrid(grid_file) |>
-    rcdo::cdo_execute()
+  out <- rcdo::cdo_execute(rcdo::cdo_setgrid(file, grid_file))
 
   file.rename(out, file)
   return(file)
@@ -65,7 +61,7 @@ grid_parse <- function(grid) {
   names <- vapply(splitted, function(x) trimws(x[[1]]), character(1))
   values <- lapply(splitted, function(x) trimws(paste0(x[-1], collapse = "=")))
 
-  setNames(values, names)
+  stats::setNames(values, names)
 }
 
 grid_write <- function(grid, file) {
