@@ -52,7 +52,7 @@ leap_year <- function(date) {
   if (is.numeric(date)) {
     year <- date
   } else {
-    year <- data.table::year(date)
+    year <- year(date)
   }
   (year %% 4 == 0) & ((year %% 100 != 0) | (year %% 400 == 0))
 }
@@ -72,8 +72,16 @@ N_DAYS_IN_MONTHS <- c(
   Dec = 31L
 )
 
+year <- function(date) {
+  as.numeric(format(date, "%Y"))
+}
+
+month <- function(date) {
+  as.numeric(format(date, "%m"))
+}
+
 days_in_month <- function(x) {
-  month_x <- data.table::month(x)
+  month_x <- month(x)
   n_days <- N_DAYS_IN_MONTHS[month_x]
   n_days[month_x == 2 & leap_year(x)] <- 29L
   n_days
