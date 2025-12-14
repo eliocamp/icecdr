@@ -4,10 +4,8 @@ parse_range <- function(x) {
     return(x)
   }
 
-  x <- x |>
-    as.character() |>
-    strsplit("-") |>
-    lapply(as.numeric)
+  x <- strsplit(as.character(x), "-")
+  x <- lapply(x, as.numeric)
 
   # Support for inputting year
   if (length(x[[1]]) == 1) {
@@ -28,16 +26,13 @@ parse_range <- function(x) {
   if (length(x[[2]]) == 2) {
     # Need to convert the month into date to correctly
     # account for leap years
-    days <- paste0(c(x[[2]], 1), collapse = "-") |>
-      as.Date() |>
-      days_in_month()
+    days <- days_in_month(as.Date(paste0(c(x[[2]], 1), collapse = "-")))
 
     x[[2]][[3]] <- days
   }
 
-  x |>
-    vapply(\(x) paste0(x, collapse = "-"), character(1)) |>
-    as.Date()
+
+  as.Date(vapply(x, function(x) paste0(x, collapse = "-"), character(1)))
 }
 
 
