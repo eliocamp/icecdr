@@ -1,4 +1,4 @@
-# nocovr start
+# nocov start
 make_cdr <- function(definition) {
   force(definition)
   function(
@@ -19,7 +19,7 @@ make_cdr <- function(definition) {
     )
   }
 }
-# nocovr end
+# nocov end
 
 #' Convenience functions
 #'
