@@ -14,7 +14,8 @@ Depends:
 RoxygenNote: 7.3.3
 Suggests: 
     ncdf4,
-    rcdo
+    rcdo,
+    testthat (>= 3.0.0)
 Imports: 
     checkmate,
     cli,
@@ -24,3 +25,4 @@ Imports:
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/eliocamp/icecdr
 BugReports: https://github.com/eliocamp/icecdr/issues
+Config/testthat/edition: 3

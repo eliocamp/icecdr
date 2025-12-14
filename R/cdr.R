@@ -176,6 +176,7 @@ cdr <- function(
   # 2gb file limit
   size_limit <- 2 * 1024 * 1024 * 1024
   n_chunks <- ceiling(size / size_limit)
+  chunk <- 1
   if (n_chunks > 1) {
     class(size) <- "object_size"
     size <- format(size, "auto")
@@ -208,9 +209,6 @@ cdr <- function(
             tools::file_ext(file)
           )
         }
-        cli::cli_inform(
-          "Downloading file {chunk} of {n_chunks} ({date_range[1]} to {date_range[2]})."
-        )
 
         cdr(
           date_range = date_range,
@@ -266,11 +264,16 @@ cdr <- function(
   old <- options(timeout = 60 * 360)
   on.exit(options(old))
 
-  if (getOption("CDR_TEST", default = FALSE)) {
+  cli::cli_inform(
+    "Downloading file {chunk} of {n_chunks} ({date_range[1]} to {date_range[2]})."
+  )
+
+  if (getOption("CDR_DONT_DOWNLOAD", default = FALSE)) {
     return(destination)
   }
 
   utils::download.file(url, destination)
+  return(destination)
 
 }
 
