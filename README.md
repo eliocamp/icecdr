@@ -5,6 +5,9 @@
 
 <!-- badges: start -->
 
+[![Codecov test
+coverage](https://codecov.io/gh/eliocamp/icecdr/graph/badge.svg)](https://app.codecov.io/gh/eliocamp/icecdr)
+[![R-CMD-check](https://github.com/eliocamp/icecdr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/eliocamp/icecdr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of icecdr is to download sea ice concentration data from the
@@ -40,7 +43,7 @@ With `use_cache = TRUE`, files are only downloaded if needed.
 ``` r
 system.time(cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE))
 #>    user  system elapsed 
-#>   0.004   0.000   0.004
+#>   0.001   0.000   0.001
 ```
 
 There are four simple functions to download whole-domain data:
