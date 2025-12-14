@@ -119,7 +119,7 @@ cdr <- function(
   bad_variables <- setdiff(variables, nsidc_variables)
   if (length(bad_variables) != 0) {
     cli::cli_abort(c(
-      "Variable{?s} no available: {.val {bad_variables}}.",
+      "Variable{?s} not available: {.val {bad_variables}}.",
       i = "See possible variables with {.code nsidc_variables}."
     ))
   }
@@ -176,7 +176,7 @@ cdr <- function(
   # 2gb file limit
   size_limit <- 2 * 1024 * 1024 * 1024
   n_chunks <- ceiling(size / size_limit)
-  chunk <- 1
+
   if (n_chunks > 1) {
     class(size) <- "object_size"
     size <- format(size, "auto")
@@ -204,11 +204,15 @@ cdr <- function(
           file <- paste0(
             tools::file_path_sans_ext(file),
             "_",
-            formatC(n_chunks, width = 2, flag = "0"),
+            formatC(chunk, width = 2, flag = "0"),
             ".",
             tools::file_ext(file)
           )
         }
+
+        cli::cli_inform(
+          "Downloading file {chunk} of {n_chunks} ({date_range[1]} to {date_range[2]})."
+        )
 
         cdr(
           date_range = date_range,
@@ -264,9 +268,6 @@ cdr <- function(
   old <- options(timeout = 60 * 360)
   on.exit(options(old))
 
-  cli::cli_inform(
-    "Downloading file {chunk} of {n_chunks} ({date_range[1]} to {date_range[2]})."
-  )
 
   if (getOption("CDR_DONT_DOWNLOAD", default = FALSE)) {
     return(destination)
