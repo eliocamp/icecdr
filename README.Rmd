@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Codecov test coverage](https://codecov.io/gh/eliocamp/icecdr/graph/badge.svg)](https://app.codecov.io/gh/eliocamp/icecdr)
+[![R-CMD-check](https://github.com/eliocamp/icecdr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/eliocamp/icecdr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of icecdr is to download sea ice concentration data from the NSIDC Climate Data Record. V4. 
