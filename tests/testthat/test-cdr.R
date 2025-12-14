@@ -60,6 +60,8 @@ test_that("Error messages", {
 
   expect_error(cdr(date_range = range, hemisphere = "antarctica"), "hemisphere")
 
+  expect_error(cdr(date_range = range, resolution = "yearly"), "resolution")
+
 })
 
 
