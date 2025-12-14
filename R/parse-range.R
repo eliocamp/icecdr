@@ -75,6 +75,6 @@ N_DAYS_IN_MONTHS <- c(
 days_in_month <- function(x) {
   month_x <- data.table::month(x)
   n_days <- N_DAYS_IN_MONTHS[month_x]
-  n_days[month_x == "Feb" & leap_year(x)] <- 29L
+  n_days[month_x == 2 & leap_year(x)] <- 29L
   n_days
 }
