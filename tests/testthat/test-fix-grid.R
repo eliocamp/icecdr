@@ -1,4 +1,6 @@
-skip_on_cran()
+cdo_installed <- system("cdo -V", ignore.stdout = TRUE) == 0
+skip_if(!cdo_installed)
+
 test_that("fix grid works", {
   file_og <- cdr_antarctic_monthly(c("2022-01", "2022-01"), dir = "test_data", use_cache = TRUE)
   file <- tempfile()
