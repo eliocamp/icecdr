@@ -66,8 +66,12 @@ as_mdlist <- function(vector) {
 #' This is a low-level function to download data from PolarWatch's ERDDAP
 #' server.
 #'
-#' @param date_range Vector of size two with the start and end dates.
-#' It can be a Date vector or any vector with a valid [as.Date()] method.
+#' @param date_range Vector of size two with the start and end dates. Supported
+#' formats are:
+#'   * A Date or POSIXct/POSIXlt object.
+#'   * A character vector with ISO format dates: `c("2020-01-01", "2020-12-31")`
+#'   * A character vector with year-month: `c("2020-01", "2020-06")` (expands to first/last day of month).
+#'   * A character vector with year only: `c("2020", "2021")` (expands to full year).
 #' @param variables Character vector with the variables to fetch. Valid values are
 #' `r as_mdlist(nsidc_variables)`
 #' @param hemisphere Character with the hemisphere to download.
@@ -136,7 +140,7 @@ cdr <- function(
     )
   }
 
-  date_range <- as.Date(date_range)
+  date_range <- parse_range(date_range)
 
   if (resolution == "monthly") {
     variables <- glue::glue("{variables}_monthly")
@@ -188,7 +192,7 @@ cdr <- function(
     }
 
     dates <- seq(date_range[1], date_range[2], by = unit)
-    chunks <- as.numeric(cut(dates, 2))
+    chunks <- as.numeric(cut(dates, n_chunks))
 
     files <- vapply(
       unique(chunks),
@@ -261,10 +265,13 @@ cdr <- function(
 
   old <- options(timeout = 60 * 360)
   on.exit(options(old))
-  # download.file(url, destination)
+
+  if (getOption("CDR_TEST", default = FALSE)) {
+    return(destination)
+  }
 
   utils::download.file(url, destination)
-  return(destination)
+
 }
 
 

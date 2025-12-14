@@ -21,8 +21,14 @@ cdr(
 )
 }
 \arguments{
-\item{date_range}{Vector of size two with the start and end dates.
-It can be a Date vector or any vector with a valid \code{\link[=as.Date]{as.Date()}} method.}
+\item{date_range}{Vector of size two with the start and end dates. Supported
+formats are:
+\itemize{
+\item A Date or POSIXct/POSIXlt object.
+\item A character vector with ISO format dates: \code{c("2020-01-01", "2020-12-31")}
+\item A character vector with year-month: \code{c("2020-01", "2020-06")} (expands to first/last day of month).
+\item A character vector with year only: \code{c("2020", "2021")} (expands to full year).
+}}
 
 \item{variables}{Character vector with the variables to fetch. Valid values are
 \itemize{
