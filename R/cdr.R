@@ -1,3 +1,4 @@
+# nocovr start
 make_cdr <- function(definition) {
   force(definition)
   function(
@@ -18,7 +19,7 @@ make_cdr <- function(definition) {
     )
   }
 }
-
+# nocovr end
 
 #' Convenience functions
 #'
@@ -57,9 +58,6 @@ file_name <- function(url) {
   digest::digest(url)
 }
 
-as_mdlist <- function(vector) {
-  paste0(paste0("* ", vector), collapse = "\n")
-}
 
 #' Download sea ice concentration from NSIDC Climate Data Record V4
 #'
@@ -73,7 +71,7 @@ as_mdlist <- function(vector) {
 #'   * A character vector with year-month: `c("2020-01", "2020-06")` (expands to first/last day of month).
 #'   * A character vector with year only: `c("2020", "2021")` (expands to full year).
 #' @param variables Character vector with the variables to fetch. Valid values are
-#' `r as_mdlist(nsidc_variables)`
+#' `r paste0(paste0("* ", nsidc_variables), collapse = "\n")`
 #' @param hemisphere Character with the hemisphere to download.
 #' Can be either "south" or "north".
 #' @param resolution Character with the temporal resolution.
