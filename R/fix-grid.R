@@ -1,15 +1,27 @@
-#' Fix the file grid definition to use with CDO
+#' Minor fixes to CDR files.
 #'
-#' The files served by the ERDDAP server lack projection information so CDO
-#' can't compute the area of each gridpoint to compute weighted means or
+#' `cdr_fix_names()` standardises variable names between versions and
+#' temporal resolutions.
+#' `cdr_fix_grid()` addds projection information to the grid definition so CDO
+#' can compute the area of each gridpoint to compute weighted means or
 #' area integrals.
+#' Both require the `rcdo` package and CDO installed.
 #'
-#' @param file Path to the file.
+#' @param files Path to the files.
 #'
-#' @return The path to the modified file.
+#' @return The path to the modified files.
 #'
 #' @export
-cdr_fix_grid <- function(file) {
+#' @rdname fixes
+cdr_fix_grid <- function(files) {
+  unname(vapply(files, cdr_fix_grid_one, character(1)))
+}
+
+cdr_fix_grid_one <- function(file) {
+  if (!file.exists(file)) {
+    cli::cli_abort("File {.file {file}} does not exist.")
+  }
+
   rlang::check_installed(c("rcdo", "ncdf4"))
 
   grid <- rcdo::cdo_execute(rcdo::cdo_griddes(file))
