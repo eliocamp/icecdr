@@ -32,7 +32,7 @@ formats are:
 }}
 
 \item{variables}{Character vector with the variables to fetch. Valid values are
-\describe{\item{\code{aice}}{Sea ice concentration.}
+\describe{\item{\code{aice}}{CDR Sea ice concentration.}
 \item{\code{qa}}{Quality control flag.}
 \item{\code{stdev}}{Sea ice standard deviation.}
 \item{\code{interpolation_spatial}}{Flag for spatial interpolation.}

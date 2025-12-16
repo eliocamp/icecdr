@@ -96,8 +96,13 @@ cdr_variables_monthly <- list(
   )
 )
 
+cdr_variables <- list(
+  monthly = cdr_variables_monthly,
+  daily = cdr_variables_daily
+)
+
 cdr_variables_description <- list(
-  aice = "Sea ice concentration.",
+  aice = "CDR Sea ice concentration.",
   qa = "Quality control flag.",
   stdev = "Sea ice standard deviation.",
   interpolation_spatial = "Flag for spatial interpolation.",
@@ -118,11 +123,6 @@ as_describe <- function(cdr_variables_description) {
   paste0("\\describe{", paste0(items, collapse = "\n"), "}")
 }
 
-
-cdr_variables <- list(
-  monthly = cdr_variables_monthly,
-  daily = cdr_variables_daily
-)
 
 variable_name <- function(variables, version, resolution) {
   version <- paste0("v", version)
