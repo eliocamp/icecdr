@@ -4,6 +4,7 @@ make_cdr <- function(definition) {
   function(
     date_range,
     variables = "aice",
+    version = 4,
     file = NULL,
     dir = tempdir(),
     use_cache = FALSE
@@ -13,6 +14,7 @@ make_cdr <- function(definition) {
       variables = variables,
       hemisphere = definition$hemisphere,
       resolution = definition$resolution,
+      version = version,
       file = file,
       dir = dir,
       use_cache = use_cache
@@ -156,7 +158,7 @@ variable_name <- function(variables, version, resolution) {
 #' @param ygrid_range Numeric vector of size 2 with the range of the y dimension.
 #' @param ygrid_stride Numeric with the stride of the y dimension.
 #' @param format Character with the format.
-#' @param version Version of the dataset. Can be 4 or 5, but be aware that
+#' @param version Version of the dataset. Can be 4 or 5.
 #' @param file Character with the file name to use for download. If `NULL`,
 #' the file name will be constructed by hashing the request URL.
 #' Requests consisting in more than one file will append a number.

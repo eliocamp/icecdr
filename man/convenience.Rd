@@ -10,6 +10,7 @@
 cdr_antarctic_monthly(
   date_range,
   variables = "aice",
+  version = 4,
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
@@ -18,6 +19,7 @@ cdr_antarctic_monthly(
 cdr_antarctic_daily(
   date_range,
   variables = "aice",
+  version = 4,
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
@@ -26,6 +28,7 @@ cdr_antarctic_daily(
 cdr_arctic_monthly(
   date_range,
   variables = "aice",
+  version = 4,
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
@@ -34,6 +37,7 @@ cdr_arctic_monthly(
 cdr_arctic_daily(
   date_range,
   variables = "aice",
+  version = 4,
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
@@ -60,6 +64,8 @@ formats are:
 Although not all variables are available in all versions and all resolutions.
 The \verb{*_nt} and \verb{*_bt} variables are only available in version 4 and the
 interpolation flags are only available for daily values.}
+
+\item{version}{Version of the dataset. Can be 4 or 5.}
 
 \item{file}{Character with the file name to use for download. If \code{NULL},
 the file name will be constructed by hashing the request URL.

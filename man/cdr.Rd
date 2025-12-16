@@ -60,7 +60,7 @@ A number greater than 1 means to take only the nth date in the series.}
 
 \item{ygrid_stride}{Numeric with the stride of the y dimension.}
 
-\item{version}{Version of the dataset. Can be 4 or 5, but be aware that}
+\item{version}{Version of the dataset. Can be 4 or 5.}
 
 \item{format}{Character with the format.}
 
