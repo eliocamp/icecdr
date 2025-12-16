@@ -6,7 +6,7 @@
 \usage{
 cdr(
   date_range = c(NA, NA),
-  variables = "cdr_seaice_conc",
+  variables = "aice",
   hemisphere = c("south", "north"),
   resolution = c("monthly", "daily"),
   date_stride = 1,
