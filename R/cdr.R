@@ -4,7 +4,7 @@ make_cdr <- function(definition) {
   function(
     date_range,
     variables = "aice",
-    version = 4,
+    version = 5,
     file = NULL,
     dir = tempdir(),
     use_cache = FALSE
