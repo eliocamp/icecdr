@@ -11,7 +11,7 @@ coverage](https://codecov.io/gh/eliocamp/icecdr/graph/badge.svg)](https://app.co
 <!-- badges: end -->
 
 The goal of icecdr is to download sea ice concentration data from the
-NSIDC Climate Data Record. V4.
+NSIDC Climate Data Record.
 
 ## Installation
 
@@ -26,7 +26,8 @@ pak::pak("eliocamp/icecdr")
 ## Example
 
 Use the `cdr_*` functions to download satellite-derived Antarctic or
-Arctic sea ice concentration data at monthly or daily resolution.
+Arctic sea ice concentration data at monthly or daily resolution. They
+use version 5 by default but version 4 is also supported.
 
 The basic usage downloads a NetCDF file in a temporary directory.
 
@@ -35,7 +36,7 @@ library(icecdr)
 
 dates <- c("2020-01-01", "2023-01-01")
 cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE)
-#> [1] "data/dfea943a54177904c651dbd736dee723.nc"
+#> [1] "data/995732f34533e77ab2bf32f847c84deb.nc"
 ```
 
 With `use_cache = TRUE`, files are only downloaded if needed.
@@ -43,7 +44,7 @@ With `use_cache = TRUE`, files are only downloaded if needed.
 ``` r
 system.time(cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE))
 #>    user  system elapsed 
-#>   0.001   0.000   0.001
+#>   0.002   0.000   0.002
 ```
 
 There are four simple functions to download whole-domain data:
