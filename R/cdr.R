@@ -171,7 +171,7 @@ variable_name <- function(variables, version, resolution) {
 cdr <- function(
   date_range = c(NA, NA),
 
-  variables = "cdr_seaice_conc",
+  variables = "aice",
   hemisphere = c("south", "north"),
   resolution = c("monthly", "daily"),
 
@@ -206,11 +206,10 @@ cdr <- function(
   if (any(missing_variable)) {
     bad_variables <- variables[missing_variable]
     cli::cli_abort(c(
-      "Variable{?s} no available for this dataset: {.val {bad_variables}}.",
+      "Variable{?s} not available for this dataset: {.val {bad_variables}}.",
       i = "See possible variables in {.help [{.fun cdr}](icecdr::cdr)}."
     ))
   }
-  variables <- variables_translated
 
   hemisphere <- hemisphere[1]
   hemispheres <- c("south", "north")
@@ -317,7 +316,7 @@ cdr <- function(
   }
 
   url <- nsidc_url(
-    variables = variables,
+    variables = variables_translated,
     hemisphere = hemisphere,
     resolution = resolution,
     date_range = date_range,
@@ -349,14 +348,12 @@ cdr <- function(
   old <- options(timeout = 60 * 360)
   on.exit(options(old))
 
-
   if (getOption("CDR_DONT_DOWNLOAD", default = FALSE)) {
     return(destination)
   }
 
   utils::download.file(url, destination)
   return(destination)
-
 }
 
 

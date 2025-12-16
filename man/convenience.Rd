@@ -9,7 +9,7 @@
 \usage{
 cdr_antarctic_monthly(
   date_range,
-  variables = "cdr_seaice_conc",
+  variables = "aice",
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
@@ -17,7 +17,7 @@ cdr_antarctic_monthly(
 
 cdr_antarctic_daily(
   date_range,
-  variables = "cdr_seaice_conc",
+  variables = "aice",
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
@@ -25,7 +25,7 @@ cdr_antarctic_daily(
 
 cdr_arctic_monthly(
   date_range,
-  variables = "cdr_seaice_conc",
+  variables = "aice",
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
@@ -33,7 +33,7 @@ cdr_arctic_monthly(
 
 cdr_arctic_daily(
   date_range,
-  variables = "cdr_seaice_conc",
+  variables = "aice",
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
