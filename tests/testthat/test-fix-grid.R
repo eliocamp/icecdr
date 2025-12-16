@@ -1,6 +1,6 @@
 cdo_installed <- system("cdo -V", ignore.stdout = TRUE) == 0
 skip_if(!cdo_installed)
-options(CDR_DONTDOWNLOAD = FALSE)
+options(CDR_DONT_DOWNLOAD = FALSE)
 test_that("fix grid works", {
   file_og <- cdr_antarctic_monthly(
     c("2022-01", "2022-01"),

@@ -1,7 +1,7 @@
 options(CDR_DONT_DOWNLOAD = TRUE)
 
 test_that("cdr_returns files", {
-  range <- as.Date(c("2023-01-01", "2023-05-31"))
+  range <- c("2023-01-01", "2023-05-31")
 
   file <- cdr_antarctic_monthly(range)
 
@@ -11,7 +11,7 @@ test_that("cdr_returns files", {
 
 
 test_that("long requets are splitted", {
-  range <- as.Date(c("1990-01-01", "2023-05-31"))
+  range <- c("1990-01-01", "2023-05-31")
 
   suppressMessages(expect_message(
     file <- cdr_arctic_daily(range, file = "arctic.nc")
@@ -31,7 +31,7 @@ test_that("long requets are splitted", {
 
 test_that("cdr downloads", {
   options(CDR_DONT_DOWNLOAD = FALSE)
-  range <- as.Date(c("2023-01-01", "2023-02-28"))
+  range <- c("2023-01", "2023-01")
 
   suppressMessages(file <- cdr_antarctic_monthly(range))
 
@@ -42,7 +42,7 @@ test_that("cdr downloads", {
 
 
 test_that("cache works", {
-  range <- as.Date(c("2023-01-01", "2023-02-28"))
+  range <- c("2023-01-01", "2023-01")
 
   suppressMessages(file <- cdr_antarctic_monthly(range, use_cache = TRUE))
   info <- file.info(file)
@@ -54,7 +54,7 @@ test_that("cache works", {
 
 test_that("Error messages", {
   options(CDR_DONT_DOWNLOAD = TRUE)
-  range <- as.Date(c("2023-01-01", "2023-02-28"))
+  range <- c("2023-01", "2023-01")
 
   expect_error(
     cdr_antarctic_monthly(

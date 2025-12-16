@@ -1,11 +1,12 @@
 cdo_installed <- system("cdo -V", ignore.stdout = TRUE) == 0
 skip_if(!cdo_installed)
-options(CDR_DONTDOWNLOAD = FALSE)
+options(CDR_DONT_DOWNLOAD = FALSE)
 test_that("fix names works", {
   file_og <- cdr_antarctic_monthly(
     c("2022-01", "2022-01"),
     dir = "test_data",
     variables = c("aice", "aice_bt"),
+    version = 4,
     use_cache = TRUE
   )
 
