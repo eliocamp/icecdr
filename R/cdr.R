@@ -219,7 +219,7 @@ cdr <- function(
     )
   }
 
-  date_range <- as.Date(date_range)
+  date_range <- parse_range(date_range)
 
   if (resolution == "monthly") {
     date_range <- floor_month(date_range)
