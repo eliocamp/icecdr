@@ -2,7 +2,7 @@
 % Please edit documentation in R/cdr.R
 \name{cdr}
 \alias{cdr}
-\title{Download sea ice concentration from NSIDC Climate Data Record V4}
+\title{Download sea ice concentration from NSIDC Climate Data Record}
 \usage{
 cdr(
   date_range = c(NA, NA),
@@ -14,6 +14,7 @@ cdr(
   xgrid_stride = 1,
   ygrid_range = c(NA, NA),
   ygrid_stride = 1,
+  version = 4,
   format = "nc",
   file = NULL,
   dir = tempdir(),
@@ -31,16 +32,16 @@ formats are:
 }}
 
 \item{variables}{Character vector with the variables to fetch. Valid values are
-\itemize{
-\item cdr_seaice_conc
-\item melt_onset_day_cdr_seaice_conc
-\item nsidc_bt_seaice_conc
-\item nsidc_nt_seaice_conc
-\item qa_of_cdr_seaice_conc
-\item spatial_interpolation_flag
-\item stdev_of_cdr_seaice_conc
-\item temporal_interpolation_flag
-}}
+\describe{\item{\code{aice}}{Sea ice concentration.}
+\item{\code{qa}}{Quality control flag.}
+\item{\code{stdev}}{Sea ice standard deviation.}
+\item{\code{interpolation_spatial}}{Flag for spatial interpolation.}
+\item{\code{interpolation_temporal}}{Flag for temporal interpolation.}
+\item{\code{aice_bt}}{Sea ice concentration of the Bootstrap method.}
+\item{\code{aice_nt}}{Sea ice concentration of the Nasa Team method.}}
+Although not all variables are available in all versions and all resolutions.
+The \verb{*_nt} and \verb{*_bt} variables are only available in version 4 and the
+interpolation flags are only available for daily values.}
 
 \item{hemisphere}{Character with the hemisphere to download.
 Can be either "south" or "north".}
@@ -58,6 +59,8 @@ A number greater than 1 means to take only the nth date in the series.}
 \item{ygrid_range}{Numeric vector of size 2 with the range of the y dimension.}
 
 \item{ygrid_stride}{Numeric with the stride of the y dimension.}
+
+\item{version}{Version of the dataset. Can be 4 or 5, but be aware that}
 
 \item{format}{Character with the format.}
 

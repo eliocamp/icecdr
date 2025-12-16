@@ -50,16 +50,16 @@ formats are:
 }}
 
 \item{variables}{Character vector with the variables to fetch. Valid values are
-\itemize{
-\item cdr_seaice_conc
-\item melt_onset_day_cdr_seaice_conc
-\item nsidc_bt_seaice_conc
-\item nsidc_nt_seaice_conc
-\item qa_of_cdr_seaice_conc
-\item spatial_interpolation_flag
-\item stdev_of_cdr_seaice_conc
-\item temporal_interpolation_flag
-}}
+\describe{\item{\code{aice}}{Sea ice concentration.}
+\item{\code{qa}}{Quality control flag.}
+\item{\code{stdev}}{Sea ice standard deviation.}
+\item{\code{interpolation_spatial}}{Flag for spatial interpolation.}
+\item{\code{interpolation_temporal}}{Flag for temporal interpolation.}
+\item{\code{aice_bt}}{Sea ice concentration of the Bootstrap method.}
+\item{\code{aice_nt}}{Sea ice concentration of the Nasa Team method.}}
+Although not all variables are available in all versions and all resolutions.
+The \verb{*_nt} and \verb{*_bt} variables are only available in version 4 and the
+interpolation flags are only available for daily values.}
 
 \item{file}{Character with the file name to use for download. If \code{NULL},
 the file name will be constructed by hashing the request URL.

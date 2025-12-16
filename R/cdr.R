@@ -3,7 +3,7 @@ make_cdr <- function(definition) {
   force(definition)
   function(
     date_range,
-    variables = "cdr_seaice_conc",
+    variables = "aice",
     file = NULL,
     dir = tempdir(),
     use_cache = FALSE
@@ -59,7 +59,77 @@ file_name <- function(url) {
 }
 
 
-#' Download sea ice concentration from NSIDC Climate Data Record V4
+cdr_variables_daily <- list(
+  v4 = list(
+    aice = "cdr_seaice_conc",
+    qa = "qa_of_cdr_seaice_conc",
+    stdev = "stdev_of_cdr_seaice_conc",
+    interpolation_spatial = "spatial_interpolation_flag",
+    interpolation_temporal = "temporal_interpolation_flag",
+    aice_bt = "nsidc_bt_seaice_conc",
+    aice_nt = "nsidc_nt_seaice_conc"
+  ),
+  v5 = list(
+    aice = "cdr_seaice_conc",
+    qa = "cdr_seaice_conc_qa_flag",
+    stdev = "cdr_seaice_conc_stdev",
+    interpolation_spatial = "cdr_seaice_conc_interp_spatial_flag",
+    interpolation_temporal = "cdr_seaice_conc_interp_temporal_flag"
+  )
+)
+
+cdr_variables_monthly <- list(
+  v4 = list(
+    aice = "cdr_seaice_conc_monthly",
+    qa = "qa_of_cdr_seaice_conc_monthly",
+    stdev = "stdev_of_cdr_seaice_conc_monthly",
+    aice_bt = "nsidc_bt_seaice_conc_monthly",
+    aice_nt = "nsidc_nt_seaice_conc_monthly"
+  ),
+
+  v5 = list(
+    aice = "cdr_seaice_conc_monthly",
+    stdev = "cdr_seaice_conc_monthly_stdev",
+    qa = "cdr_seaice_conc_monthly_qa_flag"
+  )
+)
+
+cdr_variables_description <- list(
+  aice = "Sea ice concentration.",
+  qa = "Quality control flag.",
+  stdev = "Sea ice standard deviation.",
+  interpolation_spatial = "Flag for spatial interpolation.",
+  interpolation_temporal = "Flag for temporal interpolation.",
+  aice_bt = "Sea ice concentration of the Bootstrap method.",
+  aice_nt = "Sea ice concentration of the Nasa Team method."
+)
+
+as_describe <- function(cdr_variables_description) {
+  items <- paste0(
+    "\\item{`",
+    names(cdr_variables_description),
+    "`}{",
+    unlist(cdr_variables_description),
+    "}"
+  )
+
+  paste0("\\describe{", paste0(items, collapse = "\n"), "}")
+}
+
+
+cdr_variables <- list(
+  monthly = cdr_variables_monthly,
+  daily = cdr_variables_daily
+)
+
+variable_name <- function(variables, version, resolution) {
+  version <- paste0("v", version)
+
+  cdr_variables[[resolution]][[version]][variables]
+}
+
+
+#' Download sea ice concentration from NSIDC Climate Data Record
 #'
 #' This is a low-level function to download data from PolarWatch's ERDDAP
 #' server.
@@ -71,7 +141,10 @@ file_name <- function(url) {
 #'   * A character vector with year-month: `c("2020-01", "2020-06")` (expands to first/last day of month).
 #'   * A character vector with year only: `c("2020", "2021")` (expands to full year).
 #' @param variables Character vector with the variables to fetch. Valid values are
-#' `r paste0(paste0("* ", nsidc_variables), collapse = "\n")`
+#' `r as_describe(cdr_variables_description)`
+#' Although not all variables are available in all versions and all resolutions.
+#' The `*_nt` and `*_bt` variables are only available in version 4 and the
+#' interpolation flags are only available for daily values.
 #' @param hemisphere Character with the hemisphere to download.
 #' Can be either "south" or "north".
 #' @param resolution Character with the temporal resolution.
@@ -83,6 +156,7 @@ file_name <- function(url) {
 #' @param ygrid_range Numeric vector of size 2 with the range of the y dimension.
 #' @param ygrid_stride Numeric with the stride of the y dimension.
 #' @param format Character with the format.
+#' @param version Version of the dataset. Can be 4 or 5, but be aware that
 #' @param file Character with the file name to use for download. If `NULL`,
 #' the file name will be constructed by hashing the request URL.
 #' Requests consisting in more than one file will append a number.
@@ -108,26 +182,14 @@ cdr <- function(
 
   ygrid_range = c(NA, NA),
   ygrid_stride = 1,
-
+  version = 4,
   format = "nc",
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
 ) {
-  bad_variables <- setdiff(variables, nsidc_variables)
-  if (length(bad_variables) != 0) {
-    cli::cli_abort(c(
-      "Variable{?s} not available: {.val {bad_variables}}.",
-      i = "See possible variables with {.code nsidc_variables}."
-    ))
-  }
-
-  hemisphere <- hemisphere[1]
-  hemispheres <- c("south", "north")
-  if (!checkmate::test_choice(hemisphere, hemispheres)) {
-    cli::cli_abort(
-      "{.arg hemisphere} needs to be one of {.val {hemispheres}}, not {.val {hemisphere}}."
-    )
+  if (!(version %in% c(4, 5))) {
+    cli::cli_abort("Invalid version. Available versions are 4 and 5.")
   }
 
   resolution <- resolution[1]
@@ -138,10 +200,29 @@ cdr <- function(
     )
   }
 
-  date_range <- parse_range(date_range)
+  variables_translated <- variable_name(variables, version, resolution)
+
+  missing_variable <- vapply(variables_translated, is.null, logical(1))
+  if (any(missing_variable)) {
+    bad_variables <- variables[missing_variable]
+    cli::cli_abort(c(
+      "Variable{?s} no available for this dataset: {.val {bad_variables}}.",
+      i = "See possible variables in {.help [{.fun cdr}](icecdr::cdr)}."
+    ))
+  }
+  variables <- variables_translated
+
+  hemisphere <- hemisphere[1]
+  hemispheres <- c("south", "north")
+  if (!checkmate::test_choice(hemisphere, hemispheres)) {
+    cli::cli_abort(
+      "{.arg hemisphere} needs to be one of {.val {hemispheres}}, not {.val {hemisphere}}."
+    )
+  }
+
+  date_range <- as.Date(date_range)
 
   if (resolution == "monthly") {
-    variables <- glue::glue("{variables}_monthly")
     date_range <- floor_month(date_range)
   }
 
@@ -223,6 +304,7 @@ cdr <- function(
           ygrid_range = ygrid_range,
           ygrid_stride = ygrid_stride,
           format = format,
+          version = version,
           use_cache = use_cache,
           dir = dir,
           file = file
@@ -244,6 +326,7 @@ cdr <- function(
     xgrid_stride = xgrid_stride,
     ygrid_range = ygrid_range,
     ygrid_stride = ygrid_stride,
+    version = version,
     format = format
   )
 
@@ -334,14 +417,14 @@ nsidc_url <- function(
 
   ygrid_range = c(NA, NA),
   ygrid_stride = 1,
-
+  version = 4,
   format = "nc"
 ) {
   resolution <- c(daily = "1day", monthly = "mday")[resolution]
   hemisphere <- c(south = "sh", north = "nh")[hemisphere]
 
   base <- glue::glue(
-    "https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4{hemisphere}{resolution}.{format}"
+    "https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v{version}{hemisphere}{resolution}.{format}"
   )
   date_range_str <- format(date_range, "%Y-%m-%dT00:00:00Z")
   time <- variable_definition(date_range_str, date_stride)

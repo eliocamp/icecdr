@@ -4,7 +4,7 @@
 \name{icecdr-package}
 \alias{icecdr}
 \alias{icecdr-package}
-\title{icecdr: Download Sea Ice Concentation data from the NSIDC Climate Data Record V4}
+\title{icecdr: Download Sea Ice Concentation data from the NSIDC Climate Data Record}
 \description{
 More about what it does (maybe more than one line). Continuation lines should be indented.
 }
