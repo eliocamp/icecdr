@@ -184,7 +184,7 @@ cdr <- function(
 
   ygrid_range = c(NA, NA),
   ygrid_stride = 1,
-  version = 4,
+  version = 5,
   format = "nc",
   file = NULL,
   dir = tempdir(),
@@ -416,7 +416,7 @@ nsidc_url <- function(
 
   ygrid_range = c(NA, NA),
   ygrid_stride = 1,
-  version = 4,
+  version = 5,
   format = "nc"
 ) {
   resolution <- c(daily = "1day", monthly = "mday")[resolution]

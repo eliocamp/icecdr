@@ -10,7 +10,7 @@
 cdr_antarctic_monthly(
   date_range,
   variables = "aice",
-  version = 4,
+  version = 5,
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
@@ -19,7 +19,7 @@ cdr_antarctic_monthly(
 cdr_antarctic_daily(
   date_range,
   variables = "aice",
-  version = 4,
+  version = 5,
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
@@ -28,7 +28,7 @@ cdr_antarctic_daily(
 cdr_arctic_monthly(
   date_range,
   variables = "aice",
-  version = 4,
+  version = 5,
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
@@ -37,7 +37,7 @@ cdr_arctic_monthly(
 cdr_arctic_daily(
   date_range,
   variables = "aice",
-  version = 4,
+  version = 5,
   file = NULL,
   dir = tempdir(),
   use_cache = FALSE
