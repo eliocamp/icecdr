@@ -241,7 +241,11 @@ cdr <- function(
   xgrid_range <- replace_limits(xgrid_range, xgrid_limits)
   ygrid_range <- replace_limits(ygrid_range, ygrid_limits)
 
-  size <- 4 *
+  # This came from testing the versions. V4 reports
+  # half the size than version 5. Must be the level of
+  # compression
+  size_per_point <- if (version == 4) 4 else 8
+  size <- size_per_point *
     request_size(
       variables,
       resolution,

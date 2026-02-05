@@ -33,7 +33,6 @@ cdr_fix_grid_one <- function(file) {
   }
 
   grid$gridtype <- "projection"
-  # grid$scanningMode <- NULL
 
   fnc <- ncdf4::nc_open(file)
   on.exit(ncdf4::nc_close(fnc))
