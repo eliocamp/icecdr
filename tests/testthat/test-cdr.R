@@ -17,11 +17,11 @@ test_that("long requets are splitted", {
     file <- cdr_arctic_daily(range, file = "arctic.nc")
   ))
 
-  expect_length(file, 4)
+  expect_length(file, 7)
   expect_type(file, "character")
 
   expected <- vapply(
-    1:4,
+    1:7,
     function(x) paste0("arctic_0", x, ".nc"),
     character(1)
   )
