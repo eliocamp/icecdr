@@ -21,6 +21,11 @@ cdr_fix_names_one <- function(file) {
 
   vars <- vars[vars %in% old_variables]
 
+  if (length(vars) == 0) {
+    cli::cli_inform("No standard variable name found, returning unchanged file")
+    return(file)
+  }
+
   new_variables <- vapply(
     strsplit(names(vars), split = ".", fixed = TRUE),
     function(x) x[3],
