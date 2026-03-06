@@ -344,10 +344,15 @@ cdr <- function(
   }
 
   destination <- file.path(dir, file)
+  source_file <- paste0(destination, ".source")
 
   if (use_cache) {
-    if (file.exists(destination)) {
-      return(destination)
+    if (all(file.exists(c(source_file, destination)))) {
+      existing_url <- readLines(source_file)
+      if (url == existing_url) {
+        cli::cli_inform("Returning existing file.")
+        return(destination)
+      }
     }
   }
 
@@ -373,12 +378,8 @@ cdr <- function(
     ))
   }
 
-  # # formally download the file
-  # response <- httr::GET(
-  #   private$file_url,
-  #   httr::write_disk(temp_file, overwrite = TRUE),
-  #   if(private$verbose) {httr::progress()}
-  # )
+  writeLines(url, source_file)
+
   return(destination)
 }
 
