@@ -41,6 +41,14 @@ test_that("cdr downloads", {
 })
 
 
+test_that("cdr downloads", {
+  options(CDR_DONT_DOWNLOAD = FALSE)
+  range <- c("1900-01", "2023-01")
+
+  expect_error(cdr_antarctic_monthly(range), "Not Found")
+})
+
+
 test_that("cache works", {
   range <- c("2023-01-01", "2023-01")
 

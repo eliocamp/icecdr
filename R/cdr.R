@@ -358,8 +358,41 @@ cdr <- function(
     return(destination)
   }
 
-  utils::download.file(url, destination)
+  response <- httr::GET(
+    url,
+    httr::write_disk(destination, overwrite = TRUE),
+    httr::progress()
+  )
+
+  if (httr::http_error(response)) {
+    info <- error_info(response)
+    file.remove(destination)
+    cli::cli_abort(c(
+      "Failed to download. Got error {info$status_code} with message:",
+      info$message
+    ))
+  }
+
+  # # formally download the file
+  # response <- httr::GET(
+  #   private$file_url,
+  #   httr::write_disk(temp_file, overwrite = TRUE),
+  #   if(private$verbose) {httr::progress()}
+  # )
   return(destination)
+}
+
+
+error_info <- function(response) {
+  message <- httr::content(response) |>
+    strsplit(split = "\n") |>
+    _[[1]] |>
+    grepv(pattern = "message") |>
+    gsub(pattern = "    message=\"", replacement = "") |>
+    gsub(pattern = "\";", replacement = "") |>
+    gsub(pattern = r"(\\\")", replacement = "\"", perl = TRUE)
+
+  list(status_code = response$status_code, message = message)
 }
 
 
