@@ -19,6 +19,7 @@ Imports:
     cli,
     digest,
     glue,
+    httr,
     rlang
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/eliocamp/icecdr

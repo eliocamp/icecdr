@@ -385,13 +385,12 @@ cdr <- function(
 
 
 error_info <- function(response) {
-  message <- httr::content(response) |>
-    strsplit(split = "\n") |>
-    _[[1]] |>
-    grepv(pattern = "message") |>
-    gsub(pattern = "    message=\"", replacement = "") |>
-    gsub(pattern = "\";", replacement = "") |>
-    gsub(pattern = r"(\\\")", replacement = "\"", perl = TRUE)
+  message <- httr::content(response)
+  message <- strsplit(message, split = "\n")[[1]]
+  message <- grepv(message, pattern = "message")
+  message <- gsub(message, pattern = "    message=\"", replacement = "")
+  message <- gsub(message, pattern = "\";", replacement = "")
+  message <- gsub(message, pattern = r"(\\\")", replacement = "\"", perl = TRUE)
 
   list(status_code = response$status_code, message = message)
 }

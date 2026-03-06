@@ -4,9 +4,9 @@
 \name{icecdr-package}
 \alias{icecdr}
 \alias{icecdr-package}
-\title{icecdr: Download Sea Ice Concentation data from the NSIDC Climate Data Record}
+\title{icecdr: Download Sea Ice Concentration Data from the NSIDC Climate Data Record}
 \description{
-More about what it does (maybe more than one line). Continuation lines should be indented.
+Programmatic access to NSIDC's sea ice concentration CDR via it's ERDAPP server.
 }
 \seealso{
 Useful links:
