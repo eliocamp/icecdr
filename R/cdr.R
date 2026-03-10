@@ -384,9 +384,12 @@ cdr <- function(
     return(destination)
   }
 
+  cli::cli_inform("Downloading data.")
+
   response <- httr2::request(url) |>
     httr2::req_user_agent(icecdr_user_agent) |>
     httr2::req_error(is_error = \(resp) FALSE) |>
+    httr2::req_progress(type = "down") |>
     httr2::req_perform(path = destination)
 
   if (httr2::resp_is_error(response)) {
