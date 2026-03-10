@@ -4,7 +4,7 @@ Title: Download Sea Ice Concentration Data from the NSIDC Climate Data Record
 Version: 0.1.0
 Authors@R: person("Elio", "Campitelli", , "eliocampitelli@gmail.com", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0002-7742-9230"))
-Description: Programmatic access to NSIDC's sea ice concentration CDR via it's ERDAPP server. 
+Description: Programmatic access to NSIDC's sea ice concentration CDR versions 4 and 5 via its ERDAPP server. Supports caching results and optional fixes for some inconsistencies of the raw files.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: 
