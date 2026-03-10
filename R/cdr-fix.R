@@ -17,6 +17,12 @@
 #'
 #' @return The path to the modified files.
 #'
+#' @examples
+#' \dontrun{
+#' cdr_antarctic_monthly(c("2022-01", "2022-01")) |>
+#'   cdr_fix()
+#' }
+#'
 #' @export
 #' @rdname fixes
 cdr_fix <- function(files, fix = c("names", "grid")) {

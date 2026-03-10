@@ -80,3 +80,16 @@ Path or vector of paths to the downloaded files.
 This is a low-level function to download data from PolarWatch's ERDDAP
 server.
 }
+\examples{
+\dontrun{
+cdr(date_range = c("2022-01", "2022-01"),
+    # Data every 7 days
+    date_stride = 7,
+    resolution = "daily",
+    # Thin the grid by taking every other gridpoint
+    xgrid_stride = 2,
+    ygrid_stride = 2,
+    hemisphere = "north"
+    )
+}
+}

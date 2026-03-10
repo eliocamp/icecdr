@@ -31,6 +31,14 @@ make_cdr <- function(definition) {
 #'
 #' @inheritParams cdr
 #'
+#' @returns A string vector with the location of the downloaded files
+#'
+#' @examples
+#' \dontrun{
+#' cdr_antarctic_monthly(c("2022-01", "2022-01"))
+#' }
+#'
+#'
 #' @export
 #' @rdname convenience
 cdr_antarctic_monthly <- make_cdr(list(
@@ -167,8 +175,20 @@ variable_name <- function(variables, version, resolution) {
 #' the file already exist.
 #'
 #'
-#' @return Path or vector of paths to the downloaded files.
+#' @returns Path or vector of paths to the downloaded files.
 #'
+#' @examples
+#' \dontrun{
+#' cdr(date_range = c("2022-01", "2022-01"),
+#'     # Data every 7 days
+#'     date_stride = 7,
+#'     resolution = "daily",
+#'     # Thin the grid by taking every other gridpoint
+#'     xgrid_stride = 2,
+#'     ygrid_stride = 2,
+#'     hemisphere = "north"
+#'     )
+#'}
 #' @export
 cdr <- function(
   date_range = c(NA, NA),

@@ -76,8 +76,18 @@ Requests consisting in more than one file will append a number.}
 \item{use_cache}{Logical indicating whether to not perform the download if
 the file already exist.}
 }
+\value{
+A string vector with the location of the downloaded files
+}
 \description{
 These are convenience functions to download, daily or monthly
 sea ice concentration data from the whole Antarctic or Arctic.
 For a more complete low level function, see \code{\link[=cdr]{cdr()}}.
+}
+\examples{
+\dontrun{
+cdr_antarctic_monthly(c("2022-01", "2022-01"))
+}
+
+
 }

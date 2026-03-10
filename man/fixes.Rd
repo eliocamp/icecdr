@@ -33,3 +33,10 @@ and \code{cdr_fix(fix = "grid")}, respectively.
 Using \code{cdr_fix()} to fix both at the same time is more efficient as it
 recreates each file only once.
 }
+\examples{
+\dontrun{
+cdr_antarctic_monthly(c("2022-01", "2022-01")) |>
+  cdr_fix()
+}
+
+}
