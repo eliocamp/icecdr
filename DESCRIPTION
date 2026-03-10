@@ -8,18 +8,19 @@ Description: Programmatic access to NSIDC's sea ice concentration CDR via it's E
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: 
-    R (>= 3.5)
+    R (>= 4.1.0)
 RoxygenNote: 7.3.3
 Suggests: 
     ncdf4,
     rcdo,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    vcr
 Imports: 
     checkmate,
     cli,
     digest,
     glue,
-    httr,
+    httr2,
     rlang
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/eliocamp/icecdr

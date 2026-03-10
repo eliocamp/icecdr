@@ -359,19 +359,21 @@ cdr <- function(
   old <- options(timeout = 60 * 360)
   on.exit(options(old))
 
-  if (getOption("CDR_DONT_DOWNLOAD", default = FALSE)) {
+  if (debug_no_download()) {
+    writeLines("", destination)
     return(destination)
   }
 
-  response <- httr::GET(
-    url,
-    httr::write_disk(destination, overwrite = TRUE),
-    httr::progress()
-  )
+  response <- httr2::request(url) |>
+    httr2::req_user_agent(icecdr_user_agent) |>
+    httr2::req_error(is_error = \(resp) FALSE) |>
+    httr2::req_perform(path = destination)
 
-  if (httr::http_error(response)) {
+  if (httr2::resp_is_error(response)) {
     info <- error_info(response)
-    file.remove(destination)
+    if (file.exists(destination)) {
+      file.remove(destination)
+    }
     cli::cli_abort(c(
       "Failed to download. Got error {info$status_code} with message:",
       info$message
@@ -383,9 +385,21 @@ cdr <- function(
   return(destination)
 }
 
+icecdr_user_agent <- "icecdr (https://github.com/eliocamp/icecdr)"
+
+with_no_download <- function(expr) {
+  old <- getOption("CDR_DONT_DOWNLOAD", default = FALSE)
+  on.exit(options(CDR_DONT_DOWNLOAD = old))
+  options(CDR_DONT_DOWNLOAD = TRUE)
+  return(expr)
+}
+
+debug_no_download <- function() {
+  getOption("CDR_DONT_DOWNLOAD", default = FALSE)
+}
 
 error_info <- function(response) {
-  message <- httr::content(response)
+  message <- httr2::resp_body_string(response)
   message <- strsplit(message, split = "\n")[[1]]
   message <- grepv(message, pattern = "message")
   message <- gsub(message, pattern = "    message=\"", replacement = "")

@@ -1,20 +1,17 @@
-options(CDR_DONT_DOWNLOAD = TRUE)
-
 test_that("cdr_returns files", {
   range <- c("2023-01-01", "2023-05-31")
-
-  file <- cdr_antarctic_monthly(range)
+  file <- with_no_download(cdr_antarctic_monthly(range))
 
   expect_length(file, 1)
   expect_type(file, "character")
+  expect_true(file.exists(file))
 })
 
 
 test_that("long requets are splitted", {
   range <- c("1990-01-01", "2023-05-31")
-
   suppressMessages(expect_message(
-    file <- cdr_arctic_daily(range, file = "arctic.nc")
+    file <- with_no_download(cdr_arctic_daily(range, file = "arctic.nc"))
   ))
 
   expect_length(file, 7)
@@ -29,41 +26,27 @@ test_that("long requets are splitted", {
 })
 
 
-test_that("cdr downloads", {
-  options(CDR_DONT_DOWNLOAD = FALSE)
-  range <- c("2023-01", "2023-01")
-
-  suppressMessages(file <- cdr_antarctic_monthly(range))
-
-  expect_length(file, 1)
-  expect_type(file, "character")
-  expect_true(file.exists(file))
-})
-
-
-test_that("cdr downloads", {
-  options(CDR_DONT_DOWNLOAD = FALSE)
+test_that("cdr errors with bad range", {
   range <- c("1900-01", "2023-01")
-
+  vcr::local_cassette("bad-range")
   expect_error(cdr_antarctic_monthly(range), "Not Found")
 })
 
 
 test_that("cache works", {
   range <- c("2023-01-01", "2023-01")
-
-  suppressMessages(file <- cdr_antarctic_monthly(range, use_cache = TRUE))
+  suppressMessages(
+    file <- with_no_download(cdr_antarctic_monthly(range, use_cache = TRUE))
+  )
   info <- file.info(file)
-  file2 <- cdr_antarctic_monthly(range, use_cache = TRUE)
+  file2 <- with_no_download(cdr_antarctic_monthly(range, use_cache = TRUE))
 
   expect_equal(info, file.info(file2))
 })
 
 
 test_that("Error messages", {
-  options(CDR_DONT_DOWNLOAD = TRUE)
   range <- c("2023-01", "2023-01")
-
   expect_error(
     cdr_antarctic_monthly(
       variables = "random variable",
