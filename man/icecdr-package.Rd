@@ -17,7 +17,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Elio Campitelli \email{eliocampitelli@gmail.com} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID})
+\strong{Maintainer}: Elio Campitelli \email{eliocampitelli@gmail.com} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}
