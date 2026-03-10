@@ -8,7 +8,7 @@ Description: Programmatic access to NSIDC's sea ice concentration CDR via it's E
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: 
-    R (>= 4.1.0)
+    R (>= 4.3.0)
 RoxygenNote: 7.3.3
 Suggests: 
     here,

@@ -76,17 +76,17 @@ cdr(date_range = dates,
     )
 ```
 
-The `cdr_fix_grid()` function will fix the grid information to make it work with [CDO](https://code.mpimet.mpg.de/projects/cdo). This requires CDO installed in your system. 
+The `cdr_fix()` function will fix the grid information to make it work with [CDO](https://code.mpimet.mpg.de/projects/cdo) and standardise variable names. This requires CDO installed in your system. 
 
 ```{r}
 library(rcdo)
 library(ggplot2)
 
 cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE) |> 
-  cdr_fix_grid() |> 
+  cdr_fix() |> 
   cdo_fldint() |> 
   cdo_execute() |> 
-  metR::ReadNetCDF(c(aice = "cdr_seaice_conc_monthly")) |> 
+  metR::ReadNetCDF(c("aice")) |> 
   ggplot(aes(time, aice)) +
   geom_line() +
   labs(y = "Sea ice area")

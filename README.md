@@ -36,6 +36,7 @@ library(icecdr)
 
 dates <- c("2020-01-01", "2023-01-01")
 cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE)
+#> Returning existing file.
 #> [1] "data/995732f34533e77ab2bf32f847c84deb.nc"
 ```
 
@@ -43,8 +44,9 @@ With `use_cache = TRUE`, files are only downloaded if needed.
 
 ``` r
 system.time(cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE))
+#> Returning existing file.
 #>    user  system elapsed 
-#>   0.002   0.000   0.002
+#>   0.018   0.000   0.019
 ```
 
 There are four simple functions to download whole-domain data:
@@ -72,25 +74,27 @@ cdr(date_range = dates,
     )
 ```
 
-The `cdr_fix_grid()` function will fix the grid information to make it
-work with [CDO](https://code.mpimet.mpg.de/projects/cdo). This requires
-CDO installed in your system.
+The `cdr_fix()` function will fix the grid information to make it work
+with [CDO](https://code.mpimet.mpg.de/projects/cdo) and standardise
+variable names. This requires CDO installed in your system.
 
 ``` r
 library(rcdo)
 library(ggplot2)
 
 cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE) |> 
-  cdr_fix_grid() |> 
+  cdr_fix() |> 
   cdo_fldint() |> 
   cdo_execute() |> 
-  metR::ReadNetCDF(c(aice = "cdr_seaice_conc_monthly")) |> 
+  metR::ReadNetCDF(c("aice")) |> 
   ggplot(aes(time, aice)) +
   geom_line() +
   labs(y = "Sea ice area")
 #> Warning: Using CDO version 2.4.0 which is different from the version supported by this
 #> version of rcdo (2.5.1).
 #> ℹ This warning is displayed once per session.
+#> Returning existing file.
+#> No standard variable name found, returning unchanged file
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" alt="" width="100%" />

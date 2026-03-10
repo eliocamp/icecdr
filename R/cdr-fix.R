@@ -53,6 +53,10 @@ cdr_fix_one <- function(file, fix = c("names", "grid")) {
     op <- cdo_fix_name(file, op)
   }
 
+  if (is.character(op)) {
+    return(op)
+  }
+
   out <- rcdo::cdo_execute(op)
   file.rename(out, file)
 
