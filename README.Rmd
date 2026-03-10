@@ -24,11 +24,10 @@ The goal of icecdr is to download sea ice concentration data from the NSIDC Clim
 
 ## Installation
 
-You can install the development version of icecdr from [GitHub](https://github.com/) with:
+You can install the icecdr with:
 
 ``` r
-# install.packages("pak")
-pak::pak("eliocamp/icecdr")
+install.packages("icecdr")
 ```
 
 ## Example

@@ -15,12 +15,10 @@ NSIDC Climate Data Record.
 
 ## Installation
 
-You can install the development version of icecdr from
-[GitHub](https://github.com/) with:
+You can install the icecdr with:
 
 ``` r
-# install.packages("pak")
-pak::pak("eliocamp/icecdr")
+install.packages("icecdr")
 ```
 
 ## Example
@@ -46,7 +44,7 @@ With `use_cache = TRUE`, files are only downloaded if needed.
 system.time(cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE))
 #> Returning existing file.
 #>    user  system elapsed 
-#>   0.018   0.000   0.019
+#>   0.019   0.000   0.018
 ```
 
 There are four simple functions to download whole-domain data:
