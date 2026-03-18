@@ -81,14 +81,22 @@ The `cdr_fix()` function will fix the grid information to make it work with [CDO
 library(rcdo)
 library(ggplot2)
 
-cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE) |> 
+extent_cdr <- cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE) |> 
   cdr_fix() |> 
+  cdo_gtc(0.15) |>
   cdo_fldint() |> 
   cdo_execute() |> 
-  metR::ReadNetCDF(c("aice")) |> 
-  ggplot(aes(time, aice)) +
-  geom_line() +
-  labs(y = "Sea ice area")
+  metR::ReadNetCDF(c(extent = "aice")) 
+
+extent_index <- sea_ice_index("south", "monthly", dir = "data", use_cache = TRUE) |> 
+  data.table::fread() |>
+  subset(time >= dates[1] & time <= dates[2])
+
+extent_cdr |>
+  ggplot(aes(time, extent)) +
+  geom_line(aes(colour = "cdr")) +
+  geom_line(data = extent_index, aes(colour = "sea_ice_index")) +
+  labs(y = "Sea ice extent")
   
 ```
 

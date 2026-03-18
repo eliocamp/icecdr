@@ -44,6 +44,7 @@ column with values \code{"south"} and \code{"north"} (for consistency with the f
 arguments).
 Column names are all in lower case and are the same for the daily and monthly
 products, except for an \code{area} column that is only available in the monthly product.
+Area and extent values are expressed in km^2.
 }
 \examples{
 \dontrun{

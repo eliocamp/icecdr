@@ -44,7 +44,7 @@ With `use_cache = TRUE`, files are only downloaded if needed.
 system.time(cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE))
 #> Returning existing file.
 #>    user  system elapsed 
-#>   0.019   0.000   0.018
+#>   0.014   0.000   0.014
 ```
 
 There are four simple functions to download whole-domain data:
@@ -80,19 +80,28 @@ variable names. This requires CDO installed in your system.
 library(rcdo)
 library(ggplot2)
 
-cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE) |> 
+extent_cdr <- cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE) |> 
   cdr_fix() |> 
+  cdo_gtc(0.15) |>
   cdo_fldint() |> 
   cdo_execute() |> 
-  metR::ReadNetCDF(c("aice")) |> 
-  ggplot(aes(time, aice)) +
-  geom_line() +
-  labs(y = "Sea ice area")
+  metR::ReadNetCDF(c(extent = "aice")) 
 #> Warning: Using CDO version 2.4.0 which is different from the version supported by this
 #> version of rcdo (2.5.1).
 #> ℹ This warning is displayed once per session.
 #> Returning existing file.
 #> No standard variable name found, returning unchanged file
+
+extent_index <- sea_ice_index("south", "monthly", dir = "data", use_cache = TRUE) |> 
+  data.table::fread() |>
+  subset(time >= dates[1] & time <= dates[2])
+#> Returning existing file.
+
+extent_cdr |>
+  ggplot(aes(time, extent)) +
+  geom_line(aes(colour = "cdr")) +
+  geom_line(data = extent_index, aes(colour = "sea_ice_index")) +
+  labs(y = "Sea ice extent")
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" alt="" width="100%" />
