@@ -14,6 +14,7 @@
 #' arguments).
 #' Column names are all in lower case and are the same for the daily and monthly
 #' products, except for an `area` column that is only available in the monthly product.
+#' Area and extent values are expressed in km^2.
 #'
 #' @returns The route to the file name.
 #'
@@ -22,6 +23,7 @@
 #' sea_ice_index("south", "monthly")
 #' }
 #'
+#' @export
 sea_ice_index <- function(
   hemisphere = c("south", "north"),
   resolution = c("monthly", "daily"),
@@ -97,11 +99,15 @@ sea_ice_index <- function(
 fix_daily <- function(file, hemisphere) {
   data <- utils::read.csv(file, header = FALSE, skip = 2)
 
-  data$time <- as.Date(
-    glue::glue("{data$V1}-{data$V2}-{data$V3}")
+  data$time <- as.POSIXct(
+    as.Date(
+      glue::glue("{data$V1}-{data$V2}-{data$V3}")
+    ),
+    tz = "utc"
   )
   data$extent <- data$V4
   data$hemisphere <- hemisphere
+  data$extent <- data$extent * 1e12
 
   data <- data[, c("time", "hemisphere", "extent")]
   utils::write.csv(data, file, row.names = FALSE)
@@ -112,10 +118,15 @@ merge_monthly_files <- function(in_files, out_file) {
   data <- lapply(in_files, utils::read.csv)
   data <- Reduce(rbind, data)
 
-  data$time <- as.Date(
-    glue::glue("{data$year}-{data$mo}-01")
+  data$time <- as.POSIXct(
+    as.Date(
+      glue::glue("{data$year}-{data$mo}-01")
+    ),
+    tz = "utc"
   )
   data$hemisphere <- ifelse(trimws(data$region) == "S", "south", "north")
+  data$extent <- data$extent * 1e12
+  data$area <- data$area * 1e12
 
   data <- data[, c("time", "hemisphere", "extent", "area")]
   utils::write.csv(data, out_file, row.names = FALSE)
