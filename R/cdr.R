@@ -386,22 +386,7 @@ cdr <- function(
 
   cli::cli_inform("Downloading data.")
 
-  response <- httr2::request(url) |>
-    httr2::req_user_agent(icecdr_user_agent) |>
-    httr2::req_error(is_error = \(resp) FALSE) |>
-    httr2::req_progress(type = "down") |>
-    httr2::req_perform(path = destination)
-
-  if (httr2::resp_is_error(response)) {
-    info <- error_info(response)
-    if (file.exists(destination)) {
-      file.remove(destination)
-    }
-    cli::cli_abort(c(
-      "Failed to download. Got error {info$status_code} with message:",
-      info$message
-    ))
-  }
+  download_file(url, destination)
 
   writeLines(url, source_file)
 
