@@ -2,11 +2,7 @@ cdo_installed <- system("cdo -V", ignore.stdout = TRUE) == 0
 skip_if(!cdo_installed)
 
 test_that("fix all works", {
-  file_og <- cdr_antarctic_monthly(
-    c("2022-01", "2022-01"),
-    dir = here::here("tests/testthat/test_data"),
-    use_cache = TRUE
-  )
+  file_og <- "test_data/6d5fafd0d3fa213a0a0943dc0d87ec8e.nc"
   file <- tempfile()
   file.copy(file_og, file)
 
@@ -30,11 +26,7 @@ test_that("fix all works", {
 
 
 test_that("fix grid works", {
-  file_og <- cdr_antarctic_monthly(
-    c("2022-01", "2022-01"),
-    dir = here::here("tests/testthat/test_data"),
-    use_cache = TRUE
-  )
+  file_og <- "test_data/6d5fafd0d3fa213a0a0943dc0d87ec8e.nc"
   file <- tempfile()
   file.copy(file_og, file)
 
@@ -49,13 +41,7 @@ test_that("fix grid works", {
 
 
 test_that("fix names works", {
-  file_og <- cdr_antarctic_monthly(
-    c("2022-01", "2022-01"),
-    dir = here::here("tests/testthat/test_data"),
-    variables = c("aice", "aice_bt"),
-    version = 4,
-    use_cache = TRUE
-  )
+  file_og <- "test_data/2f607d15cbb6ed73b98555c196e9eee1.nc"
 
   file <- tempfile()
   file.copy(file_og, file)
