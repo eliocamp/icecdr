@@ -1,6 +1,6 @@
 test_that("cdr_returns files", {
   range <- c("2023-01-01", "2023-05-31")
-  file <- with_no_download(cdr_antarctic_monthly(range))
+  file <- with_no_download(cdr_antarctic_monthly(range, use_cache = FALSE))
 
   expect_length(file, 1)
   expect_type(file, "character")
@@ -11,7 +11,11 @@ test_that("cdr_returns files", {
 test_that("long requets are splitted", {
   range <- c("1990-01-01", "2023-05-31")
   suppressMessages(expect_message(
-    file <- with_no_download(cdr_arctic_daily(range, file = "arctic.nc"))
+    file <- with_no_download(cdr_arctic_daily(
+      range,
+      file = "arctic.nc",
+      use_cache = FALSE
+    ))
   ))
 
   expect_length(file, 7)
@@ -50,8 +54,7 @@ test_that("Error messages", {
   expect_error(
     cdr_antarctic_monthly(
       variables = "random variable",
-      range,
-      use_cache = TRUE
+      range
     ),
     "Variable not available"
   )

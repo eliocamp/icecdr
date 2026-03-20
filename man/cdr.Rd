@@ -18,7 +18,7 @@ cdr(
   format = "nc",
   file = NULL,
   dir = tempdir(),
-  use_cache = FALSE
+  use_cache = TRUE
 )
 }
 \arguments{

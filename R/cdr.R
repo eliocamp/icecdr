@@ -7,7 +7,7 @@ make_cdr <- function(definition) {
     version = 5,
     file = NULL,
     dir = tempdir(),
-    use_cache = FALSE
+    use_cache = TRUE
   ) {
     cdr(
       date_range = date_range,
@@ -208,7 +208,7 @@ cdr <- function(
   format = "nc",
   file = NULL,
   dir = tempdir(),
-  use_cache = FALSE
+  use_cache = TRUE
 ) {
   if (!(version %in% c(4, 5))) {
     cli::cli_abort("Invalid version. Available versions are 4 and 5.")

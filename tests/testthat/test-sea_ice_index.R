@@ -1,6 +1,10 @@
 test_that("monthly sea_ice_index gets data", {
   vcr::local_cassette("sea_index_monthly")
-  file <- sea_ice_index(hemisphere = "south", resolution = "monthly")
+  file <- sea_ice_index(
+    hemisphere = "south",
+    resolution = "monthly",
+    use_cache = FALSE
+  )
 
   expect_true(file.exists(file))
 
@@ -12,7 +16,11 @@ test_that("monthly sea_ice_index gets data", {
 
 test_that("monthly sea_ice_index gets data", {
   vcr::local_cassette("sea_index_daily")
-  file <- sea_ice_index(hemisphere = "north", resolution = "daily")
+  file <- sea_ice_index(
+    hemisphere = "north",
+    resolution = "daily",
+    use_cache = FALSE
+  )
 
   expect_true(file.exists(file))
 

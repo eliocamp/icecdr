@@ -29,7 +29,7 @@ sea_ice_index <- function(
   resolution = c("monthly", "daily"),
   file = NULL,
   dir = tempdir(),
-  use_cache = FALSE
+  use_cache = TRUE
 ) {
   resolution <- resolution[1]
   resolutions <- c("monthly", "daily")

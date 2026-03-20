@@ -9,7 +9,7 @@ sea_ice_index(
   resolution = c("monthly", "daily"),
   file = NULL,
   dir = tempdir(),
-  use_cache = FALSE
+  use_cache = TRUE
 )
 }
 \arguments{

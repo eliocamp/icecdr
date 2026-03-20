@@ -33,18 +33,18 @@ The basic usage downloads a NetCDF file in a temporary directory.
 library(icecdr)
 
 dates <- c("2020-01-01", "2023-01-01")
-cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE)
+cdr_antarctic_monthly(dates, dir = "data")
 #> Returning existing file.
 #> [1] "data/995732f34533e77ab2bf32f847c84deb.nc"
 ```
 
-With `use_cache = TRUE`, files are only downloaded if needed.
+By default, files are only downloaded if needed.
 
 ``` r
-system.time(cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE))
+system.time(cdr_antarctic_monthly(dates, dir = "data"))
 #> Returning existing file.
 #>    user  system elapsed 
-#>   0.014   0.000   0.014
+#>   0.031   0.000   0.031
 ```
 
 There are four simple functions to download whole-domain data:
@@ -80,7 +80,7 @@ variable names. This requires CDO installed in your system.
 library(rcdo)
 library(ggplot2)
 
-extent_cdr <- cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE) |> 
+extent_cdr <- cdr_antarctic_monthly(dates, dir = "data") |> 
   cdr_fix() |> 
   cdo_gtc(0.15) |>
   cdo_fldint() |> 
@@ -92,7 +92,7 @@ extent_cdr <- cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE) |>
 #> Returning existing file.
 #> No standard variable name found, returning unchanged file
 
-extent_index <- sea_ice_index("south", "monthly", dir = "data", use_cache = TRUE) |> 
+extent_index <- sea_ice_index("south", "monthly", dir = "data") |> 
   data.table::fread() |>
   subset(time >= dates[1] & time <= dates[2])
 #> Returning existing file.

@@ -13,7 +13,7 @@ cdr_antarctic_monthly(
   version = 5,
   file = NULL,
   dir = tempdir(),
-  use_cache = FALSE
+  use_cache = TRUE
 )
 
 cdr_antarctic_daily(
@@ -22,7 +22,7 @@ cdr_antarctic_daily(
   version = 5,
   file = NULL,
   dir = tempdir(),
-  use_cache = FALSE
+  use_cache = TRUE
 )
 
 cdr_arctic_monthly(
@@ -31,7 +31,7 @@ cdr_arctic_monthly(
   version = 5,
   file = NULL,
   dir = tempdir(),
-  use_cache = FALSE
+  use_cache = TRUE
 )
 
 cdr_arctic_daily(
@@ -40,7 +40,7 @@ cdr_arctic_daily(
   version = 5,
   file = NULL,
   dir = tempdir(),
-  use_cache = FALSE
+  use_cache = TRUE
 )
 }
 \arguments{

@@ -41,14 +41,14 @@ The basic usage downloads a NetCDF file in a temporary directory.
 library(icecdr)
 
 dates <- c("2020-01-01", "2023-01-01")
-cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE)
+cdr_antarctic_monthly(dates, dir = "data")
 ```
 
 
-With `use_cache = TRUE`, files are only downloaded if needed. 
+By default, files are only downloaded if needed.
 
 ```{r}
-system.time(cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE))
+system.time(cdr_antarctic_monthly(dates, dir = "data"))
 ```
 
 There are four simple functions to download whole-domain data:
@@ -81,14 +81,14 @@ The `cdr_fix()` function will fix the grid information to make it work with [CDO
 library(rcdo)
 library(ggplot2)
 
-extent_cdr <- cdr_antarctic_monthly(dates, dir = "data", use_cache = TRUE) |> 
+extent_cdr <- cdr_antarctic_monthly(dates, dir = "data") |> 
   cdr_fix() |> 
   cdo_gtc(0.15) |>
   cdo_fldint() |> 
   cdo_execute() |> 
   metR::ReadNetCDF(c(extent = "aice")) 
 
-extent_index <- sea_ice_index("south", "monthly", dir = "data", use_cache = TRUE) |> 
+extent_index <- sea_ice_index("south", "monthly", dir = "data") |> 
   data.table::fread() |>
   subset(time >= dates[1] & time <= dates[2])
 
