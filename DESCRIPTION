@@ -24,6 +24,6 @@ Imports:
     httr2,
     rlang
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/eliocamp/icecdr
+URL: https://github.com/eliocamp/icecdr, https://eliocamp.github.io/icecdr/
 BugReports: https://github.com/eliocamp/icecdr/issues
 Config/testthat/edition: 3
