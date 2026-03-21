@@ -12,6 +12,7 @@ Programmatic access to NSIDC's sea ice concentration CDR versions 4 and 5 \url{h
 Useful links:
 \itemize{
   \item \url{https://github.com/eliocamp/icecdr}
+  \item \url{https://eliocamp.github.io/icecdr/}
   \item Report bugs at \url{https://github.com/eliocamp/icecdr/issues}
 }
 
