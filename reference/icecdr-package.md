@@ -12,6 +12,8 @@ Useful links:
 
 - <https://github.com/eliocamp/icecdr>
 
+- <https://eliocamp.github.io/icecdr/>
+
 - Report bugs at <https://github.com/eliocamp/icecdr/issues>
 
 ## Author
