@@ -463,6 +463,8 @@ nsidc_variables <- c(
   "temporal_interpolation_flag"
 )
 
+# Will change to
+erdap_server <- "https://coastwatch.pfeg.noaa.gov/"
 
 nsidc_url <- function(
   variables = "cdr_seaice_conc",
@@ -484,7 +486,7 @@ nsidc_url <- function(
   hemisphere <- c(south = "sh", north = "nh")[hemisphere]
 
   base <- glue::glue(
-    "https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v{version}{hemisphere}{resolution}.{format}"
+    "{erdap_server}/erddap/griddap/nsidcG02202v{version}{hemisphere}{resolution}.{format}"
   )
   date_range_str <- format(date_range, "%Y-%m-%dT00:00:00Z")
   time <- variable_definition(date_range_str, date_stride)

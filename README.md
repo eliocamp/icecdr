@@ -35,7 +35,7 @@ library(icecdr)
 dates <- c("2020-01-01", "2023-01-01")
 cdr_antarctic_monthly(dates, dir = "data")
 #> Returning existing file.
-#> [1] "data/995732f34533e77ab2bf32f847c84deb.nc"
+#> [1] "data/274b19e95476fdd58019e57f12cbc1d7.nc"
 ```
 
 By default, files are only downloaded if needed.
@@ -44,7 +44,7 @@ By default, files are only downloaded if needed.
 system.time(cdr_antarctic_monthly(dates, dir = "data"))
 #> Returning existing file.
 #>    user  system elapsed 
-#>   0.031   0.000   0.031
+#>   0.030   0.000   0.029
 ```
 
 There are four simple functions to download whole-domain data:
