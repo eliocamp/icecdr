@@ -64,7 +64,7 @@ cdr_fix_one <- function(file, fix = c("names", "grid")) {
   }
 
   out <- rcdo::cdo_execute(op)
-  file.rename(out, file)
+  file_move(out, file)
 
   return(file)
 }
@@ -164,4 +164,19 @@ cdo_fix_name <- function(file, prev_op = file) {
   )
   op <- rcdo::cdo_chname(prev_op, names)
   return(op)
+}
+
+
+# We can't really "move" if from and to
+# are on different drives.
+# Solution from https://github.com/bluegreen-labs/ecmwfr/blob/365532ef763792bdfb788616f3a383c97f3fb9a6/R/service-ds.R#L230-L240
+file_move <- function(from, to) {
+  # Copy data from temporary file to final location
+  move <- suppressWarnings(file.rename(from, to))
+
+  if (!move) {
+    file.copy(from, to, overwrite = TRUE)
+    file.remove(from)
+  }
+  return(to)
 }
