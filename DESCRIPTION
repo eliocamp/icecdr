@@ -17,7 +17,6 @@ Suggests:
     testthat (>= 3.0.0),
     vcr
 Imports: 
-    checkmate,
     cli,
     digest,
     glue,

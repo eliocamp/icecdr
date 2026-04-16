@@ -216,7 +216,7 @@ cdr <- function(
 
   resolution <- resolution[1]
   resolutions <- c("monthly", "daily")
-  if (!checkmate::test_choice(resolution, resolutions)) {
+  if (!(resolution %in% resolutions)) {
     cli::cli_abort(
       "{.arg resolutions} needs to be one of {.val {resolutions}}, not {.val {resolution}}."
     )
@@ -235,7 +235,7 @@ cdr <- function(
 
   hemisphere <- hemisphere[1]
   hemispheres <- c("south", "north")
-  if (!checkmate::test_choice(hemisphere, hemispheres)) {
+  if (!(hemisphere %in% hemispheres)) {
     cli::cli_abort(
       "{.arg hemisphere} needs to be one of {.val {hemispheres}}, not {.val {hemisphere}}."
     )
