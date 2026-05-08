@@ -8,6 +8,7 @@ NSIDC Climate Data Record.
 You can install the icecdr with:
 
 ``` r
+
 install.packages("icecdr")
 ```
 
@@ -20,6 +21,7 @@ use version 5 by default but version 4 is also supported.
 The basic usage downloads a NetCDF file in a temporary directory.
 
 ``` r
+
 library(icecdr)
 
 dates <- c("2020-01-01", "2023-01-01")
@@ -31,6 +33,7 @@ cdr_antarctic_monthly(dates, dir = "data")
 By default, files are only downloaded if needed.
 
 ``` r
+
 system.time(cdr_antarctic_monthly(dates, dir = "data"))
 #> Returning existing file.
 #>    user  system elapsed 
@@ -40,6 +43,7 @@ system.time(cdr_antarctic_monthly(dates, dir = "data"))
 There are four simple functions to download whole-domain data:
 
 ``` r
+
 cdr_antarctic_daily()
 cdr_antarctic_monthly()
 
@@ -51,6 +55,7 @@ But the [`cdr()`](https://eliocamp.github.io/icecdr/reference/cdr.md)
 function exposes all arguments to download any crazy subset
 
 ``` r
+
 cdr(date_range = dates,
     # Data every 7 days
     date_stride = 7,
@@ -68,6 +73,7 @@ function will fix the grid information to make it work with
 names. This requires CDO installed in your system.
 
 ``` r
+
 library(rcdo)
 library(ggplot2)
 

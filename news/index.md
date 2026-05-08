@@ -2,7 +2,13 @@
 
 ## icecdr (development version)
 
-Switches to the CoastWatch ERDDAP due to PolarWatch closure.
+- Switches to the CoastWatch ERDDAP due to PolarWatch closure.
+
+- Adds version 6.
+
+### Breaking changes
+
+- Default version bumped to 6.
 
 ## icecdr 1.1.0
 
