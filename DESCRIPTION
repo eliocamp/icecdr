@@ -9,7 +9,6 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: 
     R (>= 4.3.0)
-RoxygenNote: 7.3.3
 Suggests: 
     here,
     ncdf4,
@@ -26,3 +25,4 @@ Roxygen: list(markdown = TRUE)
 URL: https://github.com/eliocamp/icecdr, https://eliocamp.github.io/icecdr/
 BugReports: https://github.com/eliocamp/icecdr/issues
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0

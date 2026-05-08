@@ -14,7 +14,7 @@ cdr(
   xgrid_stride = 1,
   ygrid_range = c(NA, NA),
   ygrid_stride = 1,
-  version = 5,
+  version = 6,
   format = "nc",
   file = NULL,
   dir = tempdir(),

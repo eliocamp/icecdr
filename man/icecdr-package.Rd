@@ -6,7 +6,7 @@
 \alias{icecdr-package}
 \title{icecdr: Download Sea Ice Concentration Data from the NSIDC Climate Data Record}
 \description{
-Programmatic access to NSIDC's sea ice concentration CDR versions 4 and 5 \url{https://nsidc.org/data/g02135/versions/4} via ERDAPP server and Sea Ice index \url{https://nsidc.org/data/g02135/versions/4}. Supports caching results and optional fixes for some inconsistencies of the raw files.
+Programmatic access to NSIDC's sea ice concentration CDR https://nsidc.org/data/g02202> via ERDAPP server and Sea Ice index \url{https://nsidc.org/data/g02135}. Supports caching results and optional fixes for some inconsistencies of the raw files.
 }
 \seealso{
 Useful links:
@@ -19,6 +19,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Elio Campitelli \email{eliocampitelli@gmail.com} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item Elio Campitelli \email{eliocampitelli@gmail.com} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID}) [copyright holder]
+}
 
 }
 \keyword{internal}
