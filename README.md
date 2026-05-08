@@ -34,8 +34,8 @@ library(icecdr)
 
 dates <- c("2020-01-01", "2023-01-01")
 cdr_antarctic_monthly(dates, dir = "data")
-#> Returning existing file.
-#> [1] "data/274b19e95476fdd58019e57f12cbc1d7.nc"
+#> Downloading data.
+#> [1] "data/05c77e3b938053bdbed2137c61dc6052.nc"
 ```
 
 By default, files are only downloaded if needed.
@@ -44,7 +44,7 @@ By default, files are only downloaded if needed.
 system.time(cdr_antarctic_monthly(dates, dir = "data"))
 #> Returning existing file.
 #>    user  system elapsed 
-#>   0.030   0.000   0.029
+#>   0.019   0.000   0.020
 ```
 
 There are four simple functions to download whole-domain data:
@@ -90,12 +90,11 @@ extent_cdr <- cdr_antarctic_monthly(dates, dir = "data") |>
 #> version of rcdo (2.5.1).
 #> ℹ This warning is displayed once per session.
 #> Returning existing file.
-#> No standard variable name found, returning unchanged file
 
 extent_index <- sea_ice_index("south", "monthly", dir = "data") |> 
   data.table::fread() |>
   subset(time >= dates[1] & time <= dates[2])
-#> Returning existing file.
+#> Downloading data.
 
 extent_cdr |>
   ggplot(aes(time, extent)) +
