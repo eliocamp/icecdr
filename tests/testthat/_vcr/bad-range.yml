@@ -1,15 +1,15 @@
 http_interactions:
 - request:
     method: GET
-    uri: https://coastwatch.pfeg.noaa.gov//erddap/griddap/nsidcG02202v5shmday.nc?cdr_seaice_conc_monthly%5B%281900-01-01T00%3A00%3A00Z%29%3A1%3A%282023-01-01T00%3A00%3A00Z%29%5D%5B%284337500%29%3A1%3A%28-3937500%29%5D%5B%28-3937500%29%3A1%3A%283937500%29%5D=
+    uri: https://coastwatch.pfeg.noaa.gov//erddap/griddap/nsidcG02202v6shmday.nc?cdr_seaice_conc_monthly%5B%281900-01-01T00%3A00%3A00Z%29%3A1%3A%282023-01-01T00%3A00%3A00Z%29%5D%5B%284337500%29%3A1%3A%28-3937500%29%5D%5B%28-3937500%29%3A1%3A%283937500%29%5D=
   response:
     status: 404
     headers:
-      Date: Mon, 13 Apr 2026 00:06:32 GMT
+      Date: Fri, 08 May 2026 04:44:54 GMT
       Server: Apache
       Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
       X-Frame-Options: SAMEORIGIN, SAMEORIGIN
-      Last-Modified: Mon, 13 Apr 2026 00:06:32 GMT
+      Last-Modified: Fri, 08 May 2026 04:44:54 GMT
       xdods-server: dods/3.7
       erddap-server: 2.30.0
       Content-Description: dods-error
@@ -30,7 +30,7 @@ http_interactions:
       string: |
         Error {
             code=404;
-            message="Not Found: Your query produced no matching results. Query error: For variable=cdr_seaice_conc_monthly axis#0=time Constraint=\"[(1900-01-01T00:00:00Z):1:(2023-01-01T00:00:00Z)]\": Start=\"1900-01-01T00:00:00Z\" is less than the axis minimum=1978-11-01T00:00:00Z (and even 1978-10-16T18:45:24Z).";
+            message="Not Found: Your query produced no matching results. Query error: For variable=cdr_seaice_conc_monthly axis#0=time Constraint=\"[(1900-01-01T00:00:00Z):1:(2023-01-01T00:00:00Z)]\": Start=\"1900-01-01T00:00:00Z\" is less than the axis minimum=1978-11-01T00:00:00Z (and even 1978-10-16T18:46:54Z).";
         }
-  recorded_at: 2026-04-13 00:06:32
+  recorded_at: 2026-05-08 04:44:54
 recorded_with: VCR-vcr/2.1.0
