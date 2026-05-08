@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/eliocamp/icecdr/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/eliocamp/icecdr/blob/v1.2.0/DESCRIPTION)
 
 Campitelli E (2026). *icecdr: Download Sea Ice Concentration Data from
 the NSIDC Climate Data Record*. R package version 1.2.0,
