@@ -8,16 +8,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/eliocamp/icecdr/blob/v1.2.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/eliocamp/icecdr/blob/main/DESCRIPTION)
 
 Campitelli E (2026). *icecdr: Download Sea Ice Concentration Data from
-the NSIDC Climate Data Record*. R package version 1.2.0,
+the NSIDC Climate Data Record*. R package version 1.2.0.9000,
 <https://github.com/eliocamp/icecdr>.
 
     @Manual{,
       title = {icecdr: Download Sea Ice Concentration Data from the NSIDC Climate Data Record},
       author = {Elio Campitelli},
       year = {2026},
-      note = {R package version 1.2.0},
+      note = {R package version 1.2.0.9000},
       url = {https://github.com/eliocamp/icecdr},
     }
