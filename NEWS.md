@@ -4,6 +4,10 @@
 
 -   Adds version 6.
 
+## Breaking changes
+
+-   Default version bumped to 6.
+
 # icecdr 1.1.0
 
 ## New features

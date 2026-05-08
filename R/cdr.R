@@ -4,7 +4,7 @@ make_cdr <- function(definition) {
   function(
     date_range,
     variables = "aice",
-    version = 5,
+    version = 6,
     file = NULL,
     dir = tempdir(),
     use_cache = TRUE
@@ -219,7 +219,7 @@ cdr <- function(
 
   ygrid_range = c(NA, NA),
   ygrid_stride = 1,
-  version = 5,
+  version = 6,
   format = "nc",
   file = NULL,
   dir = tempdir(),
