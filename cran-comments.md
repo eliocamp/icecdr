@@ -1,7 +1,7 @@
 
 Tested on 
 
-* local installation Ubuntu 24.04, R 4.5.2
+* local installation Ubuntu 24.04, R 4.6.0
 * github actions
   - Ubuntu R devel
   - Ubuntu oldrel-1 
