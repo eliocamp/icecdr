@@ -11,7 +11,7 @@ complete low level function, see
 cdr_antarctic_monthly(
   date_range,
   variables = "aice",
-  version = 5,
+  version = 6,
   file = NULL,
   dir = tempdir(),
   use_cache = TRUE
@@ -20,7 +20,7 @@ cdr_antarctic_monthly(
 cdr_antarctic_daily(
   date_range,
   variables = "aice",
-  version = 5,
+  version = 6,
   file = NULL,
   dir = tempdir(),
   use_cache = TRUE
@@ -29,7 +29,7 @@ cdr_antarctic_daily(
 cdr_arctic_monthly(
   date_range,
   variables = "aice",
-  version = 5,
+  version = 6,
   file = NULL,
   dir = tempdir(),
   use_cache = TRUE
@@ -38,7 +38,7 @@ cdr_arctic_monthly(
 cdr_arctic_daily(
   date_range,
   variables = "aice",
-  version = 5,
+  version = 6,
   file = NULL,
   dir = tempdir(),
   use_cache = TRUE

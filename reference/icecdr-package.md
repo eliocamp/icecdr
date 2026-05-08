@@ -1,9 +1,9 @@
 # icecdr: Download Sea Ice Concentration Data from the NSIDC Climate Data Record
 
-Programmatic access to NSIDC's sea ice concentration CDR versions 4 and
-5 <https://nsidc.org/data/g02135/versions/4> via ERDAPP server and Sea
-Ice index <https://nsidc.org/data/g02135/versions/4>. Supports caching
-results and optional fixes for some inconsistencies of the raw files.
+Programmatic access to NSIDC's sea ice concentration CDR
+<https://nsidc.org/data/g02202> via ERDAPP server and Sea Ice index
+<https://nsidc.org/data/g02135>. Supports caching results and optional
+fixes for some inconsistencies of the raw files.
 
 ## See also
 
@@ -19,3 +19,8 @@ Useful links:
 
 **Maintainer**: Elio Campitelli <eliocampitelli@gmail.com>
 ([ORCID](https://orcid.org/0000-0002-7742-9230)) \[copyright holder\]
+
+Authors:
+
+- Elio Campitelli <eliocampitelli@gmail.com>
+  ([ORCID](https://orcid.org/0000-0002-7742-9230)) \[copyright holder\]
