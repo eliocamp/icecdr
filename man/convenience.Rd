@@ -44,7 +44,8 @@ cdr_arctic_daily(
 )
 }
 \arguments{
-\item{date_range}{Vector of size two with the start and end dates. Supported
+\item{date_range}{Vector of size two with the start and end dates. If a vector
+of size one is passed, the value will be recycled to size 2. Supported
 formats are:
 \itemize{
 \item A Date or POSIXct/POSIXlt object.
