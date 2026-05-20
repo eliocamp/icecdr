@@ -1,5 +1,8 @@
-
 parse_range <- function(x) {
+  if (length(x) == 1) {
+    x[2] <- x[1]
+  }
+
   if (is_dateish(x)) {
     return(x)
   }
@@ -31,10 +34,8 @@ parse_range <- function(x) {
     x[[2]][[3]] <- days
   }
 
-
   as.Date(vapply(x, function(x) paste0(x, collapse = "-"), character(1)))
 }
-
 
 
 is_dateish <- function(x) {

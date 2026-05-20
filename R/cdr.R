@@ -159,7 +159,8 @@ variable_name <- function(variables, version, resolution) {
 #' This is a low-level function to download data from PolarWatch's ERDDAP
 #' server.
 #'
-#' @param date_range Vector of size two with the start and end dates. Supported
+#' @param date_range Vector of size two with the start and end dates. If a vector
+#' of size one is passed, the value will be recycled to size 2. Supported
 #' formats are:
 #'   * A Date or POSIXct/POSIXlt object.
 #'   * A character vector with ISO format dates: `c("2020-01-01", "2020-12-31")`
@@ -194,7 +195,7 @@ variable_name <- function(variables, version, resolution) {
 #'
 #' @examples
 #' \dontrun{
-#' cdr(date_range = c("2022-01", "2022-01"),
+#' cdr(date_range = 2022,
 #'     # Data every 7 days
 #'     date_stride = 7,
 #'     resolution = "daily",
@@ -256,6 +257,10 @@ cdr <- function(
     cli::cli_abort(
       "{.arg hemisphere} needs to be one of {.val {hemispheres}}, not {.val {hemisphere}}."
     )
+  }
+
+  if (length(date_range) > 2) {
+    cli::cli_abort("{.arg date_range} has more than two elements.")
   }
 
   date_range <- parse_range(date_range)

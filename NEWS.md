@@ -1,5 +1,11 @@
 # icecdr (development version)
 
+## New features
+
+-   The `date_range` argument in `CDR()` now accepts a length one vector and throws an error if a vector longer than 2 elements is passed.
+
+## Bug Fixes
+
 -   `sea_ice_index` handles missing values correctly.
 
 # icecdr 1.2.0
