@@ -87,7 +87,8 @@ For a more complete low level function, see <code><a href="cdr.html">cdr()</a></
 
 
 <dl><dt id="arg-date-range">date_range<a class="anchor" aria-label="anchor" href="#arg-date-range"></a></dt>
-<dd><p>Vector of size two with the start and end dates. Supported
+<dd><p>Vector of size two with the start and end dates. If a vector
+of size one is passed, the value will be recycled to size 2. Supported
 formats are:</p><ul><li><p>A Date or POSIXct/POSIXlt object.</p></li>
 <li><p>A character vector with ISO format dates: <code>c("2020-01-01", "2020-12-31")</code></p></li>
 <li><p>A character vector with year-month: <code>c("2020-01", "2020-06")</code> (expands to first/last day of month).</p></li>

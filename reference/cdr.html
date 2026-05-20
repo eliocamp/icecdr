@@ -65,7 +65,8 @@ server.</p>
 
 
 <dl><dt id="arg-date-range">date_range<a class="anchor" aria-label="anchor" href="#arg-date-range"></a></dt>
-<dd><p>Vector of size two with the start and end dates. Supported
+<dd><p>Vector of size two with the start and end dates. If a vector
+of size one is passed, the value will be recycled to size 2. Supported
 formats are:</p><ul><li><p>A Date or POSIXct/POSIXlt object.</p></li>
 <li><p>A character vector with ISO format dates: <code>c("2020-01-01", "2020-12-31")</code></p></li>
 <li><p>A character vector with year-month: <code>c("2020-01", "2020-06")</code> (expands to first/last day of month).</p></li>
@@ -159,7 +160,7 @@ the file already exist.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="fu">cdr</span><span class="op">(</span>date_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2022-01"</span>, <span class="st">"2022-01"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="fu">cdr</span><span class="op">(</span>date_range <span class="op">=</span> <span class="fl">2022</span>,</span></span>
 <span class="r-in"><span>    <span class="co"># Data every 7 days</span></span></span>
 <span class="r-in"><span>    date_stride <span class="op">=</span> <span class="fl">7</span>,</span></span>
 <span class="r-in"><span>    resolution <span class="op">=</span> <span class="st">"daily"</span>,</span></span>

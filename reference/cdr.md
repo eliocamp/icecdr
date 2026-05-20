@@ -28,7 +28,8 @@ cdr(
 
 - date_range:
 
-  Vector of size two with the start and end dates. Supported formats
+  Vector of size two with the start and end dates. If a vector of size
+  one is passed, the value will be recycled to size 2. Supported formats
   are:
 
   - A Date or POSIXct/POSIXlt object.
@@ -137,7 +138,7 @@ Path or vector of paths to the downloaded files.
 
 ``` r
 if (FALSE) { # \dontrun{
-cdr(date_range = c("2022-01", "2022-01"),
+cdr(date_range = 2022,
     # Data every 7 days
     date_stride = 7,
     resolution = "daily",

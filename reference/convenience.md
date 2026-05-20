@@ -49,7 +49,8 @@ cdr_arctic_daily(
 
 - date_range:
 
-  Vector of size two with the start and end dates. Supported formats
+  Vector of size two with the start and end dates. If a vector of size
+  one is passed, the value will be recycled to size 2. Supported formats
   are:
 
   - A Date or POSIXct/POSIXlt object.
