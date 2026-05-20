@@ -107,6 +107,7 @@ fix_daily <- function(file, hemisphere) {
   )
   data$extent <- data$V4
   data$hemisphere <- hemisphere
+  data$extent[data$extent < 0] <- NA
   data$extent <- data$extent * 1e12
 
   data <- data[, c("time", "hemisphere", "extent")]
@@ -125,6 +126,8 @@ merge_monthly_files <- function(in_files, out_file) {
     tz = "utc"
   )
   data$hemisphere <- ifelse(trimws(data$region) == "S", "south", "north")
+  data$extent[data$extent < 0] <- NA
+  data$area[data$area < 0] <- NA
   data$extent <- data$extent * 1e12
   data$area <- data$area * 1e12
 
