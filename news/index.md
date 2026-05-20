@@ -2,7 +2,11 @@
 
 ## icecdr (development version)
 
+- `sea_ice_index` handles missing values correctly.
+
 ## icecdr 1.2.0
+
+CRAN release: 2026-05-08
 
 - Switches to the CoastWatch ERDDAP due to PolarWatch closure.
 
