@@ -6,6 +6,9 @@
 
 - The `date_range` argument in `CDR()` now accepts a length one vector
   and throws an error if a vector longer than 2 elements is passed.
+- [`sea_ice_index()`](https://eliocamp.github.io/icecdr/reference/sea_ice_index.md)
+  returns a complete time series, making implicit missing values
+  explicit.
 
 ### Bug Fixes
 
