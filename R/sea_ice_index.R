@@ -15,6 +15,9 @@
 #' Column names are all in lower case and are the same for the daily and monthly
 #' products, except for an `area` column that is only available in the monthly product.
 #' Area and extent values are expressed in km^2.
+#' Implicit missing values are made explicit.
+#' This is most notable at the start of the daily time series, where the original
+#' data has one value every other day.
 #'
 #' @returns The route to the file name.
 #'
@@ -110,6 +113,7 @@ fix_daily <- function(file, hemisphere) {
   data$extent[data$extent < 0] <- NA
   data$extent <- data$extent * 1e12
 
+  data <- complete_dataset(data, "day")
   data <- data[, c("time", "hemisphere", "extent")]
   utils::write.csv(data, file, row.names = FALSE)
   return(file)
@@ -132,6 +136,13 @@ merge_monthly_files <- function(in_files, out_file) {
   data$area <- data$area * 1e12
 
   data <- data[, c("time", "hemisphere", "extent", "area")]
+  data <- complete_dataset(data, "month")
   utils::write.csv(data, out_file, row.names = FALSE)
   return(out_file)
+}
+
+complete_dataset <- function(data, resolution) {
+  times <- seq(min(data$time), max(data$time), by = paste0("1 ", resolution))
+  complete <- data.frame(time = times, hemisphere = data$hemisphere[1])
+  merge(data, complete, all = TRUE)
 }

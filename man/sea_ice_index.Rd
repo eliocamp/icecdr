@@ -45,6 +45,9 @@ arguments).
 Column names are all in lower case and are the same for the daily and monthly
 products, except for an \code{area} column that is only available in the monthly product.
 Area and extent values are expressed in km^2.
+Implicit missing values are made explicit.
+This is most notable at the start of the daily time series, where the original
+data has one value every other day.
 }
 \examples{
 \dontrun{
