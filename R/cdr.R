@@ -443,7 +443,7 @@ cache_valid <- function(source_file, url, destination) {
   file_info <- readLines(source_file)
   file_url <- file_info[1]
 
-  if (url != existing_url) {
+  if (url != file_url) {
     return(FALSE)
   }
 
