@@ -441,7 +441,7 @@ cache_valid <- function(source_file, url, destination) {
 
   # If the destination file was modified after creating the
   # source file, we can't vouch for it.
-  if (file.mtime(source_file) < file.mtime(destination)) {
+  if (file.mtime(source_file) <= file.mtime(destination)) {
     return(FALSE)
   }
 
