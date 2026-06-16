@@ -418,8 +418,9 @@ cdr <- function(
   cli::cli_inform("Downloading data.")
 
   download_file(url, destination)
-
-  writeLines(url, source_file)
+  # We use hash because the xxh3 algorithm is fast.
+  hash <- digest::digest(file = destination, algo = "xxh3_128")
+  writeLines(c(url, hash), source_file)
 
   return(destination)
 }
@@ -439,15 +440,16 @@ cache_valid <- function(source_file, url, destination) {
     return(FALSE)
   }
 
-  # If the destination file was modified after creating the
-  # source file, we can't vouch for it.
-  if (file.mtime(source_file) <= file.mtime(destination)) {
+  file_info <- readLines(source_file)
+  file_url <- file_info[1]
+
+  if (url != existing_url) {
     return(FALSE)
   }
 
-  existing_url <- readLines(source_file)
-
-  if (url != existing_url) {
+  file_hash <- file_info[2]
+  this_hash <- digest::digest(file = destination, algo = "xxh3_128")
+  if (this_hash != file_hash) {
     return(FALSE)
   }
 
