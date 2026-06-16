@@ -283,6 +283,48 @@ cdr <- function(
   xgrid_range <- replace_limits(xgrid_range, xgrid_limits)
   ygrid_range <- replace_limits(ygrid_range, ygrid_limits)
 
+  # We test the cache here so we can return the
+  # merged file without re-downloading the parts.
+  url <- nsidc_url(
+    variables = variables_translated,
+    hemisphere = hemisphere,
+    resolution = resolution,
+    date_range = date_range,
+    date_stride = date_stride,
+    xgrid_range = xgrid_range,
+    xgrid_stride = xgrid_stride,
+    ygrid_range = ygrid_range,
+    ygrid_stride = ygrid_stride,
+    version = version,
+    format = format
+  )
+
+  if (is.null(file)) {
+    file <- paste0(file_name(url), ".", format)
+  }
+
+  if (!dir.exists(dir)) {
+    dir.create(dir)
+  }
+
+  destination <- file.path(dir, file)
+  source_file <- paste0(destination, ".source")
+
+  if (use_cache) {
+    if (all(file.exists(c(source_file, destination)))) {
+      existing_url <- readLines(source_file)
+      if (url == existing_url) {
+        cli::cli_inform("Returning existing file.")
+        return(destination)
+      }
+    }
+  }
+
+  # If cache fails, then we continue, and if the request
+  # needs to be split, we divide and recurse.
+  # The pieces get the same cache treatment, which is
+  # good to allow for partial downloads.
+
   # This came from testing the versions. V4 reports
   # half the size than version 5. Must be the level of
   # compression
@@ -360,42 +402,12 @@ cdr <- function(
       character(1)
     )
 
-    return(files)
-  }
-
-  url <- nsidc_url(
-    variables = variables_translated,
-    hemisphere = hemisphere,
-    resolution = resolution,
-    date_range = date_range,
-    date_stride = date_stride,
-    xgrid_range = xgrid_range,
-    xgrid_stride = xgrid_stride,
-    ygrid_range = ygrid_range,
-    ygrid_stride = ygrid_stride,
-    version = version,
-    format = format
-  )
-
-  if (is.null(file)) {
-    file <- paste0(file_name(url), ".", format)
-  }
-
-  if (!dir.exists(dir)) {
-    dir.create(dir)
-  }
-
-  destination <- file.path(dir, file)
-  source_file <- paste0(destination, ".source")
-
-  if (use_cache) {
-    if (all(file.exists(c(source_file, destination)))) {
-      existing_url <- readLines(source_file)
-      if (url == existing_url) {
-        cli::cli_inform("Returning existing file.")
-        return(destination)
-      }
-    }
+    merge_files(files, out = file)
+    # If the merge errors out, then we don't reach this
+    # so it's safe to clean up.
+    file.remove(files)
+    writeLines(url, source_file)
+    return(file)
   }
 
   old <- options(timeout = 60 * 360)
@@ -413,6 +425,16 @@ cdr <- function(
   writeLines(url, source_file)
 
   return(destination)
+}
+
+merge_files <- function(files, out) {
+  # We can't merge if we didn't download.
+  if (debug_no_download()) {
+    return(out)
+  }
+  rlang::check_installed("rcdo", "to merge files.")
+  rcdo::cdo_execute(rcdo::cdo_mergetime(files), out = out, cache = TRUE)
+  return(out)
 }
 
 icecdr_user_agent <- "icecdr (https://github.com/eliocamp/icecdr)"

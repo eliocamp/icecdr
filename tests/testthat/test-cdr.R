@@ -8,7 +8,7 @@ test_that("cdr_returns files", {
 })
 
 
-test_that("long requets are splitted", {
+test_that("long requets are splitted and merged", {
   range <- c("1990-01-01", "2023-05-31")
   suppressMessages(expect_message(
     file <- with_no_download(cdr_arctic_daily(
@@ -18,7 +18,7 @@ test_that("long requets are splitted", {
     ))
   ))
 
-  expect_length(file, 7)
+  expect_length(file, 1)
   expect_type(file, "character")
 
   expected <- vapply(
@@ -26,7 +26,7 @@ test_that("long requets are splitted", {
     function(x) paste0("arctic_0", x, ".nc"),
     character(1)
   )
-  expect_equal(basename(file), expected)
+  expect_true(all(!file.exists(expected)))
 })
 
 
