@@ -441,6 +441,10 @@ cache_valid <- function(source_file, url, destination) {
   }
 
   file_info <- readLines(source_file)
+  if (length(file_info) != 2) {
+    return(FALSE)
+  }
+
   file_url <- file_info[1]
 
   if (url != file_url) {
