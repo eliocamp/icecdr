@@ -9,6 +9,8 @@
 - [`sea_ice_index()`](https://eliocamp.github.io/icecdr/reference/sea_ice_index.md)
   returns a complete time series, making implicit missing values
   explicit.
+- The cdr functions now merge the fragments when a large request is
+  split.
 
 ### Bug Fixes
 
