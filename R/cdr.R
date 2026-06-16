@@ -311,12 +311,9 @@ cdr <- function(
   source_file <- paste0(destination, ".source")
 
   if (use_cache) {
-    if (all(file.exists(c(source_file, destination)))) {
-      existing_url <- readLines(source_file)
-      if (url == existing_url) {
-        cli::cli_inform("Returning existing file.")
-        return(destination)
-      }
+    if (cache_valid(source_file, url, destination)) {
+      cli::cli_inform("Returning existing file.")
+      return(destination)
     }
   }
 
@@ -435,6 +432,26 @@ merge_files <- function(files, out) {
   rlang::check_installed("rcdo", "to merge files.")
   rcdo::cdo_execute(rcdo::cdo_mergetime(files), out = out, cache = TRUE)
   return(out)
+}
+
+cache_valid <- function(source_file, url, destination) {
+  if (any(!file.exists(c(source_file, destination)))) {
+    return(FALSE)
+  }
+
+  # If the destination file was modified after creating the
+  # source file, we can't vouch for it.
+  if (file.mtime(source_file) < file.mtime(destination)) {
+    return(FALSE)
+  }
+
+  existing_url <- readLines(source_file)
+
+  if (url != existing_url) {
+    return(FALSE)
+  }
+
+  return(TRUE)
 }
 
 icecdr_user_agent <- "icecdr (https://github.com/eliocamp/icecdr)"
