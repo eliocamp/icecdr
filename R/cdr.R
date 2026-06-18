@@ -402,7 +402,7 @@ cdr <- function(
     merge_files(files, out = file)
     # If the merge errors out, then we don't reach this
     # so it's safe to clean up.
-    file.remove(files)
+    # file.remove(files)
     writeLines(url, source_file)
     return(file)
   }
