@@ -399,7 +399,7 @@ cdr <- function(
       character(1)
     )
 
-    merge_files(files, out = file)
+    merge_files(files, out = destination)
     # If the merge errors out, then we don't reach this
     # so it's safe to clean up.
     # file.remove(files)
