@@ -405,7 +405,6 @@ cdr <- function(
     # file.remove(files)
     hash <- digest::digest(file = destination, algo = "xxh3_128")
     writeLines(c(url, hash), source_file)
-    writeLines(url, source_file)
     return(file)
   }
 
