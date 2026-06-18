@@ -338,8 +338,8 @@ cdr <- function(
       ygrid_stride
     )
 
-  # 2gb file limit
-  size_limit <- 2 * 1024 * 1024 * 1024
+  # 2gb file limit by default
+  size_limit <- getOption("icecdr_size_limit", default = 2) * 1024 * 1024 * 1024
   n_chunks <- ceiling(size / size_limit)
 
   if (n_chunks > 1) {
