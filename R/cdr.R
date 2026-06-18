@@ -403,6 +403,8 @@ cdr <- function(
     # If the merge errors out, then we don't reach this
     # so it's safe to clean up.
     # file.remove(files)
+    hash <- digest::digest(file = destination, algo = "xxh3_128")
+    writeLines(c(url, hash), source_file)
     writeLines(url, source_file)
     return(file)
   }
