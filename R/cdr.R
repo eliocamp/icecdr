@@ -432,7 +432,12 @@ merge_files <- function(files, out) {
     return(out)
   }
   rlang::check_installed("rcdo", "to merge files.")
-  rcdo::cdo_execute(rcdo::cdo_mergetime(files), out = out, cache = TRUE)
+  rcdo::cdo_execute(
+    rcdo::cdo_mergetime(files),
+    out = out,
+    cache = TRUE,
+    options = "-O"
+  )
   return(out)
 }
 
