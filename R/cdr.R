@@ -429,6 +429,7 @@ cdr <- function(
 merge_files <- function(files, out) {
   # We can't merge if we didn't download.
   if (debug_no_download()) {
+    writeLines("", out)
     return(out)
   }
   rlang::check_installed("rcdo", "to merge files.")
