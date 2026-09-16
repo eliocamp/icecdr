@@ -43,3 +43,8 @@ download_file <- function(url, destination = NULL) {
   }
   return(invisible(destination))
 }
+
+
+cdr_hash <- function(file) {
+  digest::digest(file = file, algo = "xxh3_128")
+}

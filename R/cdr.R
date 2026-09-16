@@ -403,7 +403,7 @@ cdr <- function(
     # If the merge errors out, then we don't reach this
     # so it's safe to clean up.
     # file.remove(files)
-    hash <- digest::digest(file = destination, algo = "xxh3_128")
+    hash <- cdr_hash(destination)
     writeLines(c(url, hash), source_file)
     return(destination)
   }
@@ -420,7 +420,7 @@ cdr <- function(
 
   download_file(url, destination)
   # We use hash because the xxh3 algorithm is fast.
-  hash <- digest::digest(file = destination, algo = "xxh3_128")
+  hash <- cdr_hash(destination)
   writeLines(c(url, hash), source_file)
 
   return(destination)
@@ -458,7 +458,7 @@ cache_valid <- function(source_file, url, destination) {
   }
 
   file_hash <- file_info[2]
-  this_hash <- digest::digest(file = destination, algo = "xxh3_128")
+  this_hash <- cdr_hash(destination)
   if (this_hash != file_hash) {
     return(FALSE)
   }

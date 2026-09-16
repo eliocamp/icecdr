@@ -66,6 +66,19 @@ cdr_fix_one <- function(file, fix = c("names", "grid")) {
   out <- rcdo::cdo_execute(op)
   file_move(out, file)
 
+  # We need to modify the source file to
+  # update the hash; otherwise the next cdr() call
+  # fails the cache validity test and re-downloads/re-merges
+  source_file <- paste0(file, ".source")
+  if (file.exists(source_file)) {
+    source <- readLines(source_file)
+    if (length(source) == 2) {
+      hash <- cdr_hash(file)
+      source[[2]] <- hash
+      writeLines(source, source_file)
+    }
+  }
+
   return(file)
 }
 
